@@ -1,7 +1,31 @@
 doctype html
-html(lang=en)
+html(lang=en, class="no-js")
   head
     title whim
-    meta(name="mobile-web-app-capable" content="yes")
-    meta(name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, height=device-height")
-    link(rel="stylesheet" href="public/vendors/codemirror/lib/codemirror.css")
+    meta(name="mobile-web-app-capable", content="yes")
+    meta(name="viewport", content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, height=device-height")
+    link(rel="stylesheet", href="vendors/codemirror/lib/codemirror.css")
+    link(rel="stylesheet", href="vendors/ionic/css/ionic.css")
+    link(rel="stylesheet", href="vendors/roboto-fontface/roboto-fontface.css")
+    link(rel="stylesheet", href="styles/components/editor.css")
+    link(rel="stylesheet", href="styles/main.css")
+  body(ng-app="whimApp", class="b-body vflex")
+    ion-nav-view(class="b-container")
+    // dependencies
+    script(src="vendors/angular/angular.js")
+    script(src="vendors/json3/lib/json3.js")
+    script(src="vendors/codemirror/lib/codemirror.js")
+    script(src="vendors/angular-resource/angular-resource.js")
+    script(src="vendors/angular-cookies/angular-cookies.js")
+    script(src="vendors/angular-sanitize/angular-sanitize.js")
+    script(src="vendors/angular-animate/angular-animate.js")
+    script(src="vendors/angular-touch/angular-touch.js")
+    script(src="vendors/angular-ui-router/release/angular-ui-router.js")
+    script(src="vendors/angular-ui-codemirror/ui-codemirror.js")
+    script(src="vendors/collide/collide.js")
+    script(src="vendors/ionic/js/ionic.js")
+    script(src="vendors/ionic/js/ionic-angular.js")
+    
+    // application specific
+    script(src="vendors/codemirror/mode/coffeescript/coffeescript.js")
+    script(src="scripts/app.js")
