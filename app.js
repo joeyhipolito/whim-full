@@ -18,8 +18,7 @@ app.set('view engine', 'jade');
 var configDB = require('./config/db.js');
 // mongoose.connect(configDB.url);
 // config: passport
-// require('./config/passport')(passport);
-
+require('./config/passport')(passport);
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
