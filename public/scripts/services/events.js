@@ -5,6 +5,5 @@ angular.module('whimApp')
     loginSuccess    : 'auth-login-success',
     loginFailure    : 'auth-login-failure',
     logoutSuccess   : 'auth-logout-success',
-    sessionTimeout  : 'auth-session-timeout',
     notAuthenticaed : 'auth-not-authenticated'
   });
