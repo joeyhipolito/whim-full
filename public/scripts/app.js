@@ -18,7 +18,8 @@ angular
     $stateProvider
       .state('home', {
         url: '/',
-        templateUrl: 'views/home.html'
+        templateUrl: 'views/home.html',
+        controller: 'LoginCtrl'
       });
 
   });

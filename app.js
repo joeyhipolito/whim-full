@@ -16,7 +16,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 // config: db
 var configDB = require('./config/db.js');
-// mongoose.connect(configDB.url);
+mongoose.connect(configDB.url);
 // config: passport
 require('./config/passport')(passport);
 
@@ -70,6 +70,5 @@ app.use(function(err, req, res, next) {
         error: {}
     });
 });
-
 
 module.exports = app;

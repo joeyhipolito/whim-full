@@ -4,20 +4,34 @@ module.exports = function(app, passport) {
     res.render('index')
   });
 
-  // api
-
   // auth
   app.get('/auth/github', passport.authenticate('github', {scope: ['user:email', 'repo', 'delete_repo', 'read:org']}));
 
   app.get('/auth/github/callback',
     passport.authenticate('github', {
-      successRedirect: '/'
+      'successRedirect': '/#/account',
+      'failureRedirect': '/'
     })
   );
+
+  app.get('/logout', function(req,res,next){
+    req.logout();
+    res.json({
+      'loggedOut' : true
+    });
+  });
+
+  /* api */
+
+  // env
+
+  // app.post('/env', isAuthenticated, function(r))
+
+  // user
 }
 
 
-function isLoggedIn(req, res, next) {
+function isAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
     return next();
   }
