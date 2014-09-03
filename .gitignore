@@ -1,2 +1,4 @@
 node_modules
 public/vendors
+config/auth.js
+config/db.js
