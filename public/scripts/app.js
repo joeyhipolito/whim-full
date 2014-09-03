@@ -9,7 +9,8 @@ angular
     'ngTouch',
     'ui.router',
     'ui.codemirror',
-    'ionic'
+    'ionic',
+    'http-auth-interceptor'
   ])
   .config(function ($stateProvider, $urlRouterProvider) {
 
@@ -26,6 +27,18 @@ angular
     $stateProvider
       .state('account', {
         url: '/account',
-        template: '<p>Hello World</p>'
+        template: '<p style="color: #fff">{{currentUser.name}}</p>'
       });
-  });
+  })
+  .run(function ($rootScope, $location, Auth) {
+    $rootScope.$watch('currentUser', function(currentUser){
+      if (!currentUser) {
+        Auth.currentUser();
+      }
+    });
+
+    $rootScope.$on('event:auth-loginRequired', function () {
+      $location.path('/');
+      return false;
+    })
+  })
