@@ -14,7 +14,8 @@
     "angular-ui-router": "~0.2.10",
     "angular-ui-codemirror": "~0.1.6",
     "ionic": "driftyco/ionic-bower#master",
-    "roboto-fontface": "~0.2.0"
+    "roboto-fontface": "~0.2.0",
+    "angular-http-auth": "~1.2.1"
   },
   "resolutions": {
     "angular": "~1.2.17",

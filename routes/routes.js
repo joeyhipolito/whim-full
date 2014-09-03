@@ -5,21 +5,12 @@ module.exports = function(app, passport) {
   });
 
   // auth
+  var session = require('../controllers/session');
   app.get('/auth/github', passport.authenticate('github', {scope: ['user:email', 'repo', 'delete_repo', 'read:org']}));
-
-  app.get('/auth/github/callback',
-    passport.authenticate('github', {
-      'successRedirect': '/#/account',
-      'failureRedirect': '/'
-    })
+  app.get('/auth/github/callback', passport.authenticate('github',{successRedirect: '/#/account',failureRedirect: '/'})
   );
-
-  app.get('/logout', function(req,res,next){
-    req.logout();
-    res.json({
-      'loggedOut' : true
-    });
-  });
+  app.get('/auth/session', isAuthenticated, session.session);
+  app.del('/auth/logout', session.logout);
 
   /* api */
 
@@ -36,5 +27,5 @@ function isAuthenticated(req, res, next) {
     return next();
   }
 
-  res.json({error: 1, errorMessage: 'you are not authenticated'});
+  res.json({error: true, errorMessage: 'you are not authenticated'});
 }

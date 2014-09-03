@@ -22,20 +22,10 @@ angular
         controller: 'LoginCtrl'
       });
 
-  })
-  .config(function ($httpProvider) {
-    $httpProvider.interceptors.push([
-      '$injector',
-      function ($injector) {
-        return $injector.get('AuthInterceptor');
-      }
-    ]);
-  })
-  .run(function ($rootScope, AUTH_EVENTS, AuthService) {
-    $rootScope.$on('$stateChanStart', function (event, next) {
-      var authRequired =  next.authRequired;
-      if (!AuthService.isAuthenticated()) {
-        $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated);
-      };
-    });
+
+    $stateProvider
+      .state('account', {
+        url: '/account',
+        template: '<p>Hello World</p>'
+      });
   });
