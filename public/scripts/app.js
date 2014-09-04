@@ -22,6 +22,38 @@ angular
         templateUrl: 'views/home.html'
       });
 
+    $stateProvider
+      .state('explorer', {
+        abstract: true,
+        templateUrl: 'views/templates/left-sidebar.html'
+      })
+      .state('explorer.account', {
+        url: '/account',
+        templateUrl: 'views/account.html',
+        controller: 'AccountCtrl',
+        resolve: {
+          user: function(User){ 
+            return User.get();
+          },
+          orgs: function(User){
+            return User.orgs();
+          }
+        }
+      })
+      .state('explorer.repository', {
+        url: '/repo/:account',
+        templateUrl: 'views/repo.html',
+        resolve: {
+          account: function($stateParams) {
+            return $stateParams.account;
+          },
+          repos: function(account, Repo) {
+            return Repo.get({id: account}); 
+          }
+        },
+        controller: 'RepoCtrl'
+      });
+
 
     $stateProvider
       .state('account', {

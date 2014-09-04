@@ -1,0 +1,29 @@
+<ion-view ion-pane class="b-view">
+  <ion-nav-bar class="b-header-bar">
+    <ion-nav-back-button class="b-back-button">
+      <span class="b-header-bar__button b-header-bar__button--left ion-ios7-arrow-left"></span>
+    </ion-nav-back-button>
+  </ion-nav-bar>
+  <ion-header-bar class="b-header-bar" align-title="left">
+    <span ng-click="back()" class="b-header-bar__button b-header-bar__button--left ion-ios7-arrow-left"></span>
+    <h4 class="b-header-bar__title b-media">
+      <i class="b-media__icon b-media__icon--small ion-ios7-person"></i>{{account}}
+    </h4>
+    <span class="b-header-bar__button b-header-bar__button--right ion-ios7-pulse-strong"></span>
+  </ion-header-bar>
+  <ion-content class="has-header b-content">
+    <div class="b-list-group">
+      <div class="b-list-group__item b-list-group__parent b-list-parent" ng-show="repos">
+        <ul class="b-list-child">
+          <li class="b-list-child__item white" ng-repeat="repo in repos" ng-cloak>
+            <span class="b-media"><i class="b-media__icon b-media__icon--small ion-ios7-people"></i>{{repo.name}}</span>
+          </li>
+          <!-- /.b-list__item b-media white -->
+        </ul>
+        <!-- /.b-list -->
+      </div>
+      <!-- /.b-list-group__item -->
+    </div>
+    <!-- /.b-list-group -->
+  </ion-content>
+</ion-view>

@@ -25,7 +25,12 @@ module.exports = function(app, passport) {
 
   // user
   var user = require('../controllers/user');
-  app.get('/user', isAuthenticated, user.read)
+  app.get('/user', isAuthenticated, user.read);
+  app.get('/user/orgs', isAuthenticated, user.orgs);
+
+  // repos
+  var repo = require('../controllers/repo');
+  app.get('/repo/:login', isAuthenticated, repo.read);
 
   // index
   app.get('/*', function(req, res){
