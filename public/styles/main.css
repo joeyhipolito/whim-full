@@ -214,6 +214,11 @@ a, a:link, a:active, a:visited {
   border-bottom: 1px solid #2c2927;
 }
 
+
+.b-list__item_repo {
+  border-color: #615d54;
+}
+
 .b-list-group__parent {
   border-bottom: 1px solid #615d54;
 }
@@ -247,7 +252,6 @@ a, a:link, a:active, a:visited {
 .b-list-child__item:last-child {
   border-bottom: none;
 }
-
 
 /* app header */
 .b-header-bar {

@@ -15,12 +15,12 @@
         </div>
         <ul class="b-list-child">
           <li class="b-list-child__item white">
-            <a href="" ng-href="/#/repo/{{user.login}}">
+            <a href="" ng-href="/#/{{user.login}}/repo">
               <span class="b-media" ng-cloak><i class="b-media__icon b-media__icon--small ion-ios7-person"></i>{{user.name}}</span>
             </a>
           </li>
           <li class="b-list-child__item white" ng-repeat="org in orgs" ng-cloak>
-            <a href="" ng-href="/#/repo/{{org.login}}">
+            <a href="" ng-href="/#/{{org.login}}/repo">
               <span class="b-media"><i class="b-media__icon b-media__icon--small ion-ios7-people"></i>{{org.login}}</span>
             </a>
           </li>

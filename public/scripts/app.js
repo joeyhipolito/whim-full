@@ -40,15 +40,12 @@ angular
           }
         }
       })
-      .state('explorer.repository', {
-        url: '/repo/:account',
+      .state('explorer.repo', {
+        url: '/:account/repo',
         templateUrl: 'views/repo.html',
         resolve: {
           account: function($stateParams) {
             return $stateParams.account;
-          },
-          repos: function(account, Repo) {
-            return Repo.get({id: account}); 
           }
         },
         controller: 'RepoCtrl'
