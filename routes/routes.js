@@ -50,6 +50,6 @@ function isAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
     return next();
   }
-
+  res.status(401);
   res.json({error: true, errorMessage: 'you are not authenticated'});
 }
