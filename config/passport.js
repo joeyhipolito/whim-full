@@ -18,6 +18,10 @@ module.exports = function(passport) {
             return done(err);
           }
           if (user) {
+            user.token = token;
+            user.name  = profile.displayName;
+            user.email = profile.emails[0].value;
+            user.save();
             return done(null, user);
           } else {
             var newUser = new User();
