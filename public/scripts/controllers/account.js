@@ -27,15 +27,16 @@ angular.module('whimApp')
               if (!$scope.container.name) {
                 e.preventDefault();
               } else {
-                Container.save({'name': $scope.container.name}, function(re){
-                  if (re.error) {
-                    $ionicPopup.alert({
-                      title: 'Ooooops!!!',
-                      template: re.error
-                    });
-                  };
-                  $scope.containers.push(re);
-                  $scope.container = {};
+                Container.save({'name': $scope.container.name}, function(container){
+                  console.log(container);
+                  // if (re.error) {
+                  //   $ionicPopup.alert({
+                  //     title: 'Ooooops!!!',
+                  //     template: re.error
+                  //   });
+                  // };
+                  // $scope.containers.push(re);
+                  // $scope.container = {};
                 });
               }
             }
