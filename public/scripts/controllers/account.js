@@ -10,5 +10,11 @@ angular.module('whimApp')
       $scope.orgs = re;
     });
 
+    $scope.containers = [
+      {
+        id: '7919585',
+        name: 'hello-world'
+      }
+    ];
 
   });

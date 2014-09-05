@@ -216,6 +216,11 @@ a, a:link, a:active, a:visited {
 
 
 .b-list__item_repo {
+  height: 48px;
+  border-color: #615d54;
+}
+
+.b-list__item_repo:last-child {
   border-color: #615d54;
 }
 
@@ -324,6 +329,7 @@ a, a:link, a:active, a:visited {
 .b-media {
   display: flex;
   align-items: center;
+  position: relative;
 }
 
 .b-media--top {
@@ -342,6 +348,28 @@ a, a:link, a:active, a:visited {
 
 }
 
+.b-media__icon_repo {
+  border-right: 1px solid #615d54;;
+}
+
+.b-media__icon--left {
+  position: absolute;
+  left: 0;
+}
+
+.b-media__icon--right {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  right: 0;
+}
+
+.b-media__text_repo {
+  padding-left: 12px;
+}
+
 .b-media__icon--small {
   font-size: 1.2em;
   height: 24px;
@@ -354,6 +382,10 @@ a, a:link, a:active, a:visited {
   width: 48px;
   height: 48px;
   line-height: 48px;
+}
+
+.b-media__icon--medium > img {
+  height: 42.857142857%;
 }
 
 .b-media__icon_img {}

@@ -3,7 +3,7 @@
 angular.module('whimApp')
   .factory('Org', function ($resource) {
     return $resource(
-      '/org:listController:id/:docController',
+      '/org/:listController:id/:docController',
       {
         id: '@id',
         listController: '@listController',
@@ -13,6 +13,7 @@ angular.module('whimApp')
         repos: {
           method: 'GET',
           cache: true,
+          isArray: true,
           params: {
             docController: 'repos'
           }

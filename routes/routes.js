@@ -1,27 +1,27 @@
 module.exports = function(app, passport) {
-  // index
+  
+  /* index */
+
   app.get('/', function(req, res){
     res.render('index')
   });
 
-  // api
-  
-
-  // auth
+  /* authentication */
   var session = require('../controllers/session');
-  app.get('/auth/github', passport.authenticate('github', {scope: ['user:email', 'repo', 'delete_repo', 'read:org']}));
+  app.get('/auth/github', passport.authenticate('github', {scope: ['user:email', 'repo', 'read:org']}));
   app.get('/auth/github/callback', passport.authenticate('github',{successRedirect: '/#/account',failureRedirect: '/'})
   );
   app.get('/auth/session', isAuthenticated, session.session);
   app.delete('/auth/logout', session.logout);
 
   /* api */
-  app.get('/secured', isAuthenticated, function (req, res) {
-    res.json({'authenticated' : true});
-  });
+  var container = require('../controllers/container');
+  app.post('/container', isAuthenticated, container.create);
+
+  app.put('/container/:id/run', isAuthenticated, container.run);
   // env
 
-  // app.post('/env', isAuthenticated, function(r))
+
 
   // user
   var user = require('../controllers/user');

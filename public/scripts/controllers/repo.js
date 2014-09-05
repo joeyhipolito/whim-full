@@ -5,11 +5,15 @@ angular.module('whimApp')
     if (account === $scope.currentUser.username) {
       User.repos(function(re){
         $scope.repos = re;
-        console.log($scope.repos);
       });
     } else {
-      Org.repos(function(re){
-        console.log(re);
+      Org.repos({id: account}, function(re){
+        $scope.repos = re;
       });
     }
+
+    $scope.back = function() {
+      $ionicNavBarDelegate.back();
+    }
+
   });
