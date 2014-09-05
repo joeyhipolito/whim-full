@@ -37,6 +37,9 @@ angular
           },
           orgs: function(User){
             return User.orgs();
+          },
+          containers: function(Container) {
+            return Container.query();
           }
         }
       })

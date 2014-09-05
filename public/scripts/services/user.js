@@ -3,7 +3,7 @@
 angular.module('whimApp')
   .factory('User', function ($resource) {
     return $resource(
-      '/user:listController:id/:docController',
+      '/user/:listController:id/:docController',
       {
         id: '@id',
         listController: '@listController',

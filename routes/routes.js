@@ -12,16 +12,14 @@ module.exports = function(app, passport) {
   app.get('/auth/github/callback', passport.authenticate('github',{successRedirect: '/#/account',failureRedirect: '/'})
   );
   app.get('/auth/session', isAuthenticated, session.session);
-  app.delete('/auth/logout', session.logout);
+  app.delete('/auth/session', session.logout);
 
   /* api */
   var container = require('../controllers/container');
+  app.get('/container', isAuthenticated, container.query);
   app.post('/container', isAuthenticated, container.create);
-
   app.put('/container/:id/run', isAuthenticated, container.run);
   // env
-
-
 
   // user
   var user = require('../controllers/user');

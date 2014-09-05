@@ -1,4 +1,4 @@
-<ion-side-menus>
+<ion-side-menus ng-controller="LoginCtrl">
   
   <ion-pane ion-side-menu-content class="b-pane">
     <ion-nav-view animation="slide-left-right" class="b-nav-view"></ion-nav-view>
@@ -51,7 +51,7 @@
             <span class="b-media__icon b-media__icon--medium ion-ios7-settings"></span>
             <span class="b-media__text">Account Settings</span>
           </li>
-          <li class="b-list__item b-nav-list__item b-media white">
+          <li class="b-list__item b-nav-list__item b-media white" ng-click="logout()">
             <span class="b-media__icon b-media__icon--medium ion-ios7-undo-outline"></span>
             <span class="b-media__text">Logout</span>
           </li>
