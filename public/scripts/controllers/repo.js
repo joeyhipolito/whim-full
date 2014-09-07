@@ -4,15 +4,27 @@ angular.module('whimApp')
     $scope.account = account;
     
     // TODO : this shouldn't be like this fuck
-    $ionicLoading.show({
-      template: 'Loading repositories'
-    });
+    
     if (account === $scope.currentUser.username) {
+      $ionicLoading.show({
+        content: 'Loading repositories',
+        animation: 'fade-in',
+        showBackdrop: false,
+        maxWidth: 200,
+        showDelay: 500
+      });
       User.repos(function(re){
         $ionicLoading.hide();
         $scope.repos = re;
       });
     } else {
+      $ionicLoading.show({
+        content: 'Loading repositories',
+        animation: 'fade-in',
+        showBackdrop: false,
+        maxWidth: 200,
+        showDelay: 500
+      });
       Org.repos({id: account}, function(re){
         $ionicLoading.hide();
         $scope.repos = re;
@@ -48,7 +60,6 @@ angular.module('whimApp')
                       title: 'Success!',
                       subTitle: 'Cloned to ' + container.name
                     });
-                    $scope.containers.push(container);
                     $scope.container = {};
                   }
                   

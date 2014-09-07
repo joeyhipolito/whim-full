@@ -43,8 +43,8 @@ angular
           }
         }
       })
-      .state('explorer.repo', {
-        url: '/:account/repo',
+      .state('explorer.repos', {
+        url: '/:account/repos',
         templateUrl: 'views/repo.html',
         resolve: {
           account: function($stateParams) {
@@ -52,6 +52,11 @@ angular
           }
         },
         controller: 'RepoCtrl'
+      })
+      .state('explorer.container', {
+        url: '/container/:id',
+        templateUrl: 'views/container.html',
+        controller: 'ContainerCtrl'
       });
 
 

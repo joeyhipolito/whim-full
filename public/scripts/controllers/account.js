@@ -1,6 +1,6 @@
 'use strict';
 angular.module('whimApp')
-  .controller('AccountCtrl', function ($scope, user, orgs, containers, $ionicPopup, $timeout, Container) {
+  .controller('AccountCtrl', function ($scope, user, orgs, containers, $ionicPopup, $timeout, Container, $ionicLoading) {
     
     $scope.user = user;
     $scope.orgs = orgs;

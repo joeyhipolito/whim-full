@@ -15,12 +15,12 @@
         </div>
         <ul class="b-list-child" ng-show="user.login">
           <li class="b-list-child__item white">
-            <a href="" ng-href="/#/{{user.login}}/repo">
+            <a href="" ng-href="/#/{{user.login}}/repos">
               <span class="b-media" ng-cloak><i class="b-media__icon b-media__icon--small ion-ios7-person"></i>{{user.login}}</span>
             </a>
           </li>
           <li class="b-list-child__item white" ng-repeat="org in orgs" ng-cloak>
-            <a href="" ng-href="/#/{{org.login}}/repo">
+            <a href="" ng-href="/#/{{org.login}}/repos">
               <span class="b-media"><i class="b-media__icon b-media__icon--small ion-ios7-people"></i>{{org.login}}</span>
             </a>
           </li>
@@ -36,11 +36,10 @@
         <div class="b-media white b-list-parent__group">
           <span class="b-media__icon b-media__icon--large b-list-parent__icon ion-flask"></span>
           <h4 class="b-list-parent__title">Containers</h4>
-          <i ng-click="showPopup()" class="b-media__icon b-media__icon--medium b-media__icon--right ion-plus" ng-cloak></i>
         </div>
         <ul class="b-list-child">
           <li class="b-list-child__item white" ng-repeat="container in containers" ng-show="container.name">
-            <a href="" ng-href="">
+            <a href="" ng-href="/#/container/{{container.name}}">
               <span class="b-media">
                 <i class="b-media__icon b-media__icon--small ion-fireball" ng-cloak></i>
                 {{container.name}}
