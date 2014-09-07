@@ -26,7 +26,7 @@ exports.clone = function(req, res) {
             if (err) {
               throw err;
             } else {
-              docker.run('whim/clone', [req.body.url], process.stdout, {}, {"VolumesFrom": newContainer.name}, function(err, cloneData){
+              docker.run('whim/clone', [req.body.url, '.'], process.stdout, {}, {"VolumesFrom": newContainer.name}, function(err, cloneData){
                 res.json(newContainer);
               });
             }
