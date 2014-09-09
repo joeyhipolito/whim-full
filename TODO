@@ -4,3 +4,39 @@
 https://medium.com/opinionated-angularjs/techniques-for-authentication-in-angularjs-applications-7bbf0346acec
 http://www.espeo.pl/authentication-in-angularjs-application/
 
+## Situation
+
+1. There is a data-only-container named: app-data
+2. There is a copier container worker
+
+Initially app/data was created and that's it, it's status is 'stop' / exited.
+Then the copier worker copies some files to app/data as its volume, for example an `server.py`
+
+Okay this was done like this:
+
+docker run --rm --volumes-from app-data /somelocation/server.py ~/www/
+> the copier takes 2 arguments, the file to copy and where to copy <
+
+With that at hand, I can run a image named app/serve to server the file in the volume like so:
+
+docker run --volumes-from app-data -d -P app/serve
+> the image entry point do this http-server, and workdir is same as the data volume, so it'll run <
+
+Hell yeah it works, and the python web app can be accessed in the host with a highport like so: 0.0.0.0:49124 because
+the app/serve image expose ports 5000 which is used by the sever.py script
+
+I had the above working, you can focus below.
+
+So the app can run huh? But I want to do more complex things that just running the app (I ran the app using the remote api), what if I want to run the app using a web console connected to a docker container.
+
+## My Idea of how would it be possible
+
+  1. use [term.js][1]
+  2. expose 2 ports e.g. (4000, 5000)
+  3. use port 4000, so that when term.js executes in port 4000, it'll generate a highport for the client to use in the web console socket connection
+  4. use port 5000 to allow whatever web application ran in port 5000 will be available in a another highport, to be accessed like so 0.0.0.0:49124
+
+  [1]: https://github.com/chjj/term.js
+
+the container where the term is running should also have utilities like node and git to accomodate whim commands
+
