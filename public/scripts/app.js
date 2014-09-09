@@ -16,34 +16,68 @@ angular
 
     $urlRouterProvider.otherwise('/');
 
+
     $stateProvider
       .state('home', {
         url: '/',
         templateUrl: 'views/home.html'
       });
 
+    // account
+
     $stateProvider
-      .state('explorer', {
+      .state('account',{
         abstract: true,
-        templateUrl: 'views/templates/left-sidebar.html'
-      })
-      .state('explorer.account', {
-        url: '/account',
-        templateUrl: 'views/account.html',
-        controller: 'AccountCtrl',
+        templateUrl: 'views/templates/left-sidebar.html',
         resolve: {
-          user: function(User){ 
+          user: function(User) {
             return User.get();
           },
-          orgs: function(User){
+          orgs: function(User) {
             return User.orgs();
-          },
+          }
+        }
+      })
+      .state('account.dashboard',{
+        url: '/account',
+        templateUrl: 'views/dashboard.html',
+        controller: 'DashboardCtrl'
+      })
+      .state('account.settings', {
+        url: '/settings',
+        templateUrl: 'views/settings.html',
+        controller: 'AccountCtrl',
+        resolve: {
+          user: function(User) {
+            return User.get();
+          }
+        }
+      });
+
+    // container
+    $stateProvider
+      .state('container',{
+        abstract: true,
+        templateUrl: 'views/templates/left-sidebar.html',
+        resolve: {
           containers: function(Container) {
             return Container.query();
           }
         }
       })
-      .state('explorer.repos', {
+      .state('container.containers',{
+        url: '/container',
+        templateUrl: 'views/container.html',
+        controller: 'ContainerCtrl'
+      });
+
+    // repository
+    $stateProvider
+      .state('repository', {
+        abstract: true,
+        templateUrl: 'views/templates/left-sidebar.html'
+      })
+      .state('repository.repos', {
         url: '/:account/repos',
         templateUrl: 'views/repo.html',
         resolve: {
@@ -52,27 +86,9 @@ angular
           }
         },
         controller: 'RepoCtrl'
-      })
-      .state('explorer.container', {
-        url: '/container/:id',
-        templateUrl: 'views/container.html',
-        controller: 'ContainerCtrl'
       });
 
 
-    $stateProvider
-      .state('account', {
-        url: '/account',
-        template: '<p style="color: #fff">{{currentUser.name}}</p><a ng-href="/">home</a><h1 style="color: #fff" ng-click="test()">test</h1>',
-        controller: function($scope, test) {
-          $scope.test = function() {
-            console.log('clicked!');
-            test.get(function (re) {
-              console.log(re);
-            });
-          };
-        }
-      });
   })
   .run(function ($rootScope, $location, Auth) {
     $rootScope.$watch('currentUser', function(currentUser){

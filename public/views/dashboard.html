@@ -1,0 +1,57 @@
+<ion-view ion-pane class="b-view">
+  <ion-nav-bar class="b-header-bar">
+  </ion-nav-bar>
+  <ion-header-bar class="b-header-bar" align-title="left">
+    <span menu-toggle="left" class="b-header-bar__button b-header-bar__button--left ion-ios7-gear"></span>
+    <h4 class="b-header-bar__title">Account Explorer</h4>
+    <span class="b-header-bar__button b-header-bar__button--right ion-ios7-pulse-strong"></span>
+  </ion-header-bar>
+  <ion-content class="has-header b-content">
+    <div class="b-list-group">
+      <div class="b-list-group__item b-list-group__parent b-list-parent">
+        <div class="b-media white b-list-parent__group">
+          <span class="b-media__icon b-media__icon--large b-list-parent__icon ion-social-github"></span>
+          <h4 class="b-list-parent__title">Github</h4>
+        </div>
+        <ul class="b-list-child" ng-show="user.login">
+          <li class="b-list-child__item white">
+            <a href="" ng-href="/#/{{user.login}}/repos">
+              <span class="b-media" ng-cloak><i class="b-media__icon b-media__icon--small ion-ios7-person"></i>{{user.login}}</span>
+            </a>
+          </li>
+          <li class="b-list-child__item white" ng-repeat="org in orgs" ng-cloak>
+            <a href="" ng-href="/#/{{org.login}}/repos">
+              <span class="b-media"><i class="b-media__icon b-media__icon--small ion-ios7-people"></i>{{org.login}}</span>
+            </a>
+          </li>
+          <!-- /.b-list__item b-media white -->
+        </ul>
+        <!-- /.b-list -->
+      </div>
+      <!-- /.b-list-group__item -->
+    </div>
+    
+    <!-- whim-cloud examples -->
+    <div class="b-list-group">
+      <div class="b-list-group__item b-list-group__parent b-list-parent">
+        <div class="b-media white b-list-parent__group">
+          <span class="b-media__icon b-media__icon--large b-list-parent__icon ion-beer"></span>
+          <h4 class="b-list-parent__title">Developer's Lab</h4>
+        </div>
+        <ul class="b-list-child" ng-show="user.login">
+          <li class="b-list-child__item white" ng-cloak>
+            <a href="" ng-href="/#/whim-cloud/repos">
+              <span class="b-media"><i class="b-media__icon b-media__icon--small ion-flash"></i>whim-cloud</span>
+            </a>
+          </li>
+          <!-- /.b-list__item b-media white -->
+        </ul>
+        <!-- /.b-list -->
+      </div>
+      <!-- /.b-list-group__item -->
+    </div>
+
+    <!-- /.b-list-group -->
+
+  </ion-content>
+</ion-view>

@@ -7,21 +7,21 @@
   <ion-header-bar class="b-header-bar" align-title="left">
     <span ng-click="back()" class="b-header-bar__button b-header-bar__button--left ion-ios7-arrow-left"></span>
     <h4 class="b-header-bar__title b-media">
-      <i class="b-media__icon b-media__icon--small ion-ios7-person"></i>{{container.name}}
+      <i class="b-media__icon b-media__icon--small ion-flask"></i>Containers
     </h4>
     <span class="b-header-bar__button b-header-bar__button--right ion-ios7-pulse-strong"></span>
   </ion-header-bar>
   <ion-content class="has-header b-content">
-    <div class="b-list-group">
-      <div class="b-list-group__item">
-        <ul class="b-list">
-          <li class="b-list__item b-media white b-list__item_repo" ng-repeat="repo in repos" ng-cloak>
-            <span class="b-media__icon b-media__icon_repo b-media__icon--medium">
-              <img src="images/logo-inverse.png" alt="">
-            </span>
-            <span class="b-media__text b-media__text_repo">{{repo.name}}</span>
-            <span ng-click="clone(repo.clone_url)" class="b-media__icon b-media__icon--right b-media__icon--medium ion-ios7-cloud-download-outline">
-            </span>
+    <div class="b-list-group" ng-show="containers">
+      <div class="b-list-group__item b-list-group__parent b-list-parent">
+        <ul class="b-list-child">
+          <li class="b-list-child__item white" ng-repeat="container in containers" ng-show="container.name">
+            <a href="" ng-href="/#/container/{{container.name}}">
+              <span class="b-media">
+                <i class="b-media__icon b-media__icon--small ion-fireball" ng-cloak></i>
+                {{container.name}}
+              </span>
+            </a>
           </li>
           <!-- /.b-list__item b-media white -->
         </ul>
