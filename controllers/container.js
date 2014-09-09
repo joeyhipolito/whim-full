@@ -24,13 +24,9 @@ exports.run = function (req, res) {
   //     });
   //   });
   // });
-  docker.run('whim/exec', [], [], {}, {"VolumesFrom": dataContainer, "PublishAllPorts": true}, function(err){
-    if (err) {
-      throw err;
-    };
-  }).on('container', function (err, container) {
-    res.json(container);
-  })
+  docker.run('whim/exec', [], [], {}, {"VolumesFrom": dataContainer, "PublishAllPorts": true}, function(err, data){
+    res.json(data);
+  });
 };
 
 exports.read = function (req, res) {
