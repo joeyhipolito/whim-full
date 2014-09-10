@@ -1,7 +1,8 @@
 'use strict';
 angular.module('whimApp')
   .controller('RepoCtrl', function ($scope, $stateParams, $ionicNavBarDelegate, $ionicPopup, $ionicLoading, repos, user, Org) {
-
+    
+    $scope.container = {};
     $ionicLoading.show({
       template: 'Loading repositories'        
     });
@@ -21,33 +22,7 @@ angular.module('whimApp')
       });
     }
 
-    
-
-    // $scope.account = account;
-
-    // // TODO : this shouldn't be like this fuck
-    
-    // if (account === $scope.currentUser.username) {
-    //   $ionicLoading.show({
-    //     template: 'Loading repositories'        
-    //   });
-    //   User.repos(function(re){
-    //     $ionicLoading.hide();
-    //     $scope.repos = re;
-    //   });
-    // } else {
-    //   $ionicLoading.show({
-    //     template: 'Loading repositories'        
-    //   });
-    //   Org.repos({id: account}, function(re){
-    //     $ionicLoading.hide();
-    //     $scope.repos = re;
-    //   });
-    // }
-
     // clone
-    
-
     $scope.clone = function(repoUrl) {
       $ionicPopup.show({
         template: '<input type="text" ng-model="container.name">',
