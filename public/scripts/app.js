@@ -2,14 +2,10 @@
 
 angular
   .module('whimApp', [
-    'ngAnimate',
+    'ionic',
     'ngCookies',
     'ngResource',
-    'ngSanitize',
-    'ngTouch',
-    'ui.router',
     'ui.codemirror',
-    'ionic',
     'http-auth-interceptor'
   ])
   .config(function ($stateProvider, $urlRouterProvider) {
