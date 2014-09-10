@@ -1,6 +1,6 @@
 'use strict';
 angular.module('whimApp')
-  .controller('RepoCtrl', function ($scope, $stateParams, $ionicNavBarDelegate, $ionicPopup, $ionicLoading, repos, user, Org) {
+  .controller('RepoCtrl', function ($scope, $stateParams, $ionicNavBarDelegate, $ionicPopup, $ionicLoading, repos, user, Org, Repo) {
     
     $scope.container = {};
     $ionicLoading.show({
