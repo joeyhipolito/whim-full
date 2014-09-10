@@ -1,38 +1,52 @@
 'use strict';
 angular.module('whimApp')
-  .controller('RepoCtrl', function ($scope, account, $ionicNavBarDelegate, Org, User, Repo, $ionicPopup, $ionicLoading) {
-    $scope.account = account;
-    
-    // TODO : this shouldn't be like this fuck
-    
-    if (account === $scope.currentUser.username) {
-      $ionicLoading.show({
-        content: 'Loading repositories',
-        animation: 'fade-in',
-        showBackdrop: false,
-        maxWidth: 200,
-        showDelay: 500
-      });
-      User.repos(function(re){
+  .controller('RepoCtrl', function ($scope, $stateParams, $ionicNavBarDelegate, $ionicPopup, $ionicLoading, repos, user, Org) {
+
+    $ionicLoading.show({
+      template: 'Loading repositories'        
+    });
+
+    if ($stateParams.org) {
+      $scope.account = $stateParams.org;
+      Org.repos({id: $stateParams.org}, function (repos) {
+        $scope.repos = repos;
         $ionicLoading.hide();
-        $scope.repos = re;
-      });
+      })
     } else {
-      $ionicLoading.show({
-        content: 'Loading repositories',
-        animation: 'fade-in',
-        showBackdrop: false,
-        maxWidth: 200,
-        showDelay: 500
-      });
-      Org.repos({id: account}, function(re){
-        $ionicLoading.hide();
+      $scope.account = $stateParams.user;
+
+      repos.$promise.then(function (re) {
         $scope.repos = re;
+        $ionicLoading.hide();
       });
     }
 
+    
+
+    // $scope.account = account;
+
+    // // TODO : this shouldn't be like this fuck
+    
+    // if (account === $scope.currentUser.username) {
+    //   $ionicLoading.show({
+    //     template: 'Loading repositories'        
+    //   });
+    //   User.repos(function(re){
+    //     $ionicLoading.hide();
+    //     $scope.repos = re;
+    //   });
+    // } else {
+    //   $ionicLoading.show({
+    //     template: 'Loading repositories'        
+    //   });
+    //   Org.repos({id: account}, function(re){
+    //     $ionicLoading.hide();
+    //     $scope.repos = re;
+    //   });
+    // }
+
     // clone
-    $scope.container = {};
+    
 
     $scope.clone = function(repoUrl) {
       $ionicPopup.show({

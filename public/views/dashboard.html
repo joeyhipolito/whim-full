@@ -15,12 +15,12 @@
         </div>
         <ul class="b-list-child" ng-show="user.login">
           <li class="b-list-child__item white">
-            <a href="" ng-href="/#/{{user.login}}/repos">
+            <a href="" ng-href="/#/repo?user={{user.login}}">
               <span class="b-media" ng-cloak><i class="b-media__icon b-media__icon--small ion-ios7-person"></i>{{user.login}}</span>
             </a>
           </li>
           <li class="b-list-child__item white" ng-repeat="org in orgs" ng-cloak>
-            <a href="" ng-href="/#/{{org.login}}/repos">
+            <a href="" ng-href="/#/repo?org={{org.login}}">
               <span class="b-media"><i class="b-media__icon b-media__icon--small ion-ios7-people"></i>{{org.login}}</span>
             </a>
           </li>
@@ -40,7 +40,7 @@
         </div>
         <ul class="b-list-child" ng-show="user.login">
           <li class="b-list-child__item white" ng-cloak>
-            <a href="" ng-href="/#/whim-cloud/repos">
+            <a href="" ng-href="/#/repo?org=whim-cloud">
               <span class="b-media"><i class="b-media__icon b-media__icon--small ion-flash"></i>whim-cloud</span>
             </a>
           </li>

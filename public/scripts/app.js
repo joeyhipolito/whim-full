@@ -74,11 +74,14 @@ angular
         templateUrl: 'views/templates/left-sidebar.html'
       })
       .state('repository.repos', {
-        url: '/:account/repos',
+        url: '/repo?user&org',
         templateUrl: 'views/repo.html',
         resolve: {
-          account: function($stateParams) {
-            return $stateParams.account;
+          user: function (User) {
+            return User.get();
+          },
+          repos: function(User) {
+            return User.repos();
           }
         },
         controller: 'RepoCtrl'

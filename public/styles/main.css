@@ -127,9 +127,9 @@ a, a:link, a:active, a:visited {
 .b-pane {
   background: #282524;
   box-shadow: -4px 0 0 rgba(0,0,0,0.18) !important;
-  border: none !important;;
+  border: none !important;
   right: 0px !important;
-  left: 0px !important;;
+  left: 0px !important;
 }
 
 .b-content {
@@ -349,7 +349,7 @@ a, a:link, a:active, a:visited {
 }
 
 .b-media__icon_repo {
-  border-right: 1px solid #615d54;;
+  border-right: 1px solid #615d54;
 }
 
 .b-media__icon--left {

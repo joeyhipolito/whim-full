@@ -13,6 +13,10 @@ angular.module('whimApp')
         get: {
           cache: true
         },
+        query: {
+          cache: true,
+          isArray: true
+        },
         run: {
           method: 'PUT',
           params: {
