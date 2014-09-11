@@ -1,11 +1,10 @@
 'use strict';
 angular.module('whimApp')
-  .controller('ContainerCtrl', function ($scope, $ionicNavBarDelegate, $ionicLoading, $ionicActionSheet, container) {
+  .controller('ContainerCtrl', function ($scope, $ionicNavBarDelegate, $ionicLoading, container, Container) {
     
     var loadingText = 'Loading container info...';
     container.$promise.then(function (container) {
       $scope.container = container;
-      console.log(container);
       $ionicLoading.hide();
     });
 
@@ -13,26 +12,10 @@ angular.module('whimApp')
       template: loadingText
     });
 
-    var select = function () {
-      $ionicActionSheet.show({
-        buttons: [
-          { text: 'View Container'},
-          { text: 'Run Container' },
-          { text: 'Stop Container' }
-        ],
-        titleText: 'Manage your container',
-        cancelText: 'Cancel',
-        buttonClicked: function(index) {
-          if (index === 0) {
-            $state.go('container.container', {id: cid});
-          } else if (index === 1) {
-            run(idx);
-            return true;
-          } else if (index === 2) {
-            stop(idx);
-            return true;
-          }
-        }
+    $scope.stopContainer = function () {
+      // console.log($scope.container);
+      Container.delete({id: $scope.container.cid}, function(container){
+        $scope.container = container;
       });
     };
 

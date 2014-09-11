@@ -58,12 +58,19 @@ exports.read = function (req, res) {
 
 exports.stop = function (req, res) {
   var cid = req.param('id');
-
-  docker.getContainer(cid).stop(function(err){
-    if (err !== null) {
-      res.json({stopped: true});
-    } else {
-      res.json({stopped: false});
-    }
+  Container.findOne({'cid': cid}, function (err, dataContainer) {
+    res.json({
+      createdAt: "2014-09-11T08:12:18.856Z",
+      name: "helloworld",
+      user: "540ea0648949ea5c112b609c",
+      worker: {id: "e498fb45", status: "stopped"}
+    });
   });
+  // docker.getContainer(cid).stop(function(err){
+  //   if (err !== null) {
+  //     res.json({stopped: true});
+  //   } else {
+  //     res.json({stopped: false});
+  //   }
+  // });
 }

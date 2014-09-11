@@ -285,6 +285,12 @@ a, a:link, a:active, a:visited {
   right: 0;
 }
 
+.b-header-bar__button > img {
+  height: 30px;
+  width: 30px;
+  line-height: 30px;
+}
+
 .b-header-bar__title {
   height: 100%;
   color: #f0ebd1;
@@ -465,6 +471,10 @@ a, a:link, a:active, a:visited {
 
 .w-container__icon--active {
   color: #ffcc00;
+}
+
+.w-container__control--stopped {
+  color: #cc3238;
 }
 
 /* button animations */

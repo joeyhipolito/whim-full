@@ -9,19 +9,51 @@
     <h4 class="b-header-bar__title b-media">
       <i class="b-media__icon b-media__icon--small ion-fireball" ng-class="{'w-container__icon--active': container.worker.status == 'running'}"></i>{{container.name}}
     </h4>
-    <span class="b-header-bar__button b-header-bar__button--right ion-ios7-pulse-strong"></span>
+    <span class="b-header-bar__button b-header-bar__button--right">
+      <img src="images/ssh-terminal.png" alt="">
+    </span>
   </ion-header-bar>
   <ion-content class="has-header b-content">
     <div class="b-list-group">
-      <div class="b-list-group__item b-list-group__parent b-list-parent">
-        <ul class="b-list-child">
-          <li class="b-list-child__item white" ng-repeat="container in containers" ng-show="container.name">
-            <a href="" ng-click="selectContainer($index)">
-              <span class="b-media">
-                {{container.name}}
-                <i class="b-media__icon b-media__icon--medium b-media__icon--right ion-fireball" ng-class="{'w-container__icon--active': container.worker.status == 'running'}" ng-cloak></i>
-              </span>
-            </a>
+      <div class="b-list-group__item">
+        <h5 class="b-list-group__title">App Info</h5>
+        <ul class="b-list">
+          <li class="b-list__item b-media white">
+            <span class="b-media__icon b-media__icon--medium ion-ios7-bolt-outline"></span>
+            <span class="b-media__text">Name: {{container.name}}</span>
+          </li>
+          <li class="b-list__item b-media white">
+            <span class="b-media__icon b-media__icon--medium ion-ios7-person-outline"></span>
+            <span class="b-media__text">Owner: {{currentUser.name}}</span>
+          </li>
+          <!-- /.b-list__item b-media white -->
+        </ul>
+        <!-- /.b-list -->
+      </div>
+      <!-- /.b-list-group__item -->
+    </div>
+    <!-- /.b-list-group -->
+    <div class="b-list-group">
+      <div class="b-list-group__item">
+        <h5 class="b-list-group__title b-media" ng-if="container.worker.status == 'running'">
+          Stop
+          <i ng-click="stopContainer()" class="b-media__icon b-media__icon--medium b-media__icon--right ion-stop w-container__control--stopped" ng-cloak></i>
+        </h5>
+        <h5 class="b-list-group__title b-media" ng-if="container.worker.status == 'stopped'">
+          Run
+          <i class="b-media__icon b-media__icon--medium b-media__icon--right ion-play" ng-cloak></i>
+        </h5>
+      </div>
+      <!-- /.b-list-group__item -->
+    </div>
+    <!-- /.b-list-group -->
+    <div class="b-list-group">
+      <div class="b-list-group__item">
+        <h5 class="b-list-group__title">Network info</h5>
+        <ul class="b-list">
+          <li class="b-list__item b-nav-list__item b-media white" ng-show="container.worker.app">
+            <span class="b-media__icon b-media__icon--medium ion-ios7-eye-outline"></span>
+            <span class="b-media__text">App Url: {{container.worker.app}}</span>
           </li>
           <!-- /.b-list__item b-media white -->
         </ul>
