@@ -46,28 +46,27 @@ angular
         abstract: true,
         templateUrl: 'views/templates/left-sidebar.html',
         resolve: {
+          container: function ($stateParams, Container) {
+            if ($stateParams.id) {
+              return Container.get({id: $stateParams.id});
+            } else {
+              return null;
+            }
+          },
           containers: function(Container) {
             return Container.query();
           }
-        }
+        },
+        controller: 'ContainerCtrl'
       })
       .state('container.containers',{
         url: '/container',
-        templateUrl: 'views/container.html',
-        controller: 'ContainerCtrl'
+        templateUrl: 'views/container.html'
       })
       .state('container.container', {
         url: '/container/:id',
-        templateUrl: 'views/container-single.html',
-        resolve: {
-          container: function ($stateParams, Container) {
-            return Container.get({id: $stateParams.id});
-          }
-        },
-        controller: function (container) {
-          console.log(container);
-        }
-      })
+        templateUrl: 'views/container-single.html'
+      });
 
     // repository
     $stateProvider
