@@ -26,11 +26,7 @@ exports.run = function (req, res) {
       } else {
         docker.createContainer({'Image': 'whim/node'}, function (err, container) {
 
-          dataContainer.worker = {
-            id: container.id.substr(0, 12),
-            status: 'running'
-          };
-          dataContainer.save();
+          
 
           container.attach({stream: true, stdout: true, stderr: true, tty: true}, function (err, stream) {
             stream.pipe(process.stdout);
@@ -38,7 +34,13 @@ exports.run = function (req, res) {
               console.log(data);
             });
             docker.getContainer(dataContainer.worker.id).inspect(function (err, data) {
-              res.json(data);
+              dataContainer.worker = {
+                id: container.id.substr(0, 12),
+                status: 'running',
+                app: data.NetworkSettings.Ports['5000/tcp'][0].HostPort,
+                term: data.NetworkSettings.Ports['8080/tcp'][0].HostPort
+              };
+              dataContainer.save();
             });
           });
         });
