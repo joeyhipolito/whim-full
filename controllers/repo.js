@@ -20,6 +20,7 @@ exports.clone = function(req, res) {
       }, function (err, container) {
         container.start(function (err, data) {
           var newContainer = Container();
+          newContainer.cid  = container.id;
           newContainer.name = req.user.username + '-' + req.body.name;
           newContainer.user = req.user._id;
           newContainer.save(function(err){
