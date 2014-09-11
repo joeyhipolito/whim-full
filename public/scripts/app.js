@@ -100,7 +100,8 @@ angular
 
 
   })
-  .run(function ($rootScope, $location, Auth) {
+  .run(function ($rootScope, $location, Auth, $ionicLoading) {
+    $ionicLoading.hide();
     $rootScope.$watch('currentUser', function(currentUser){
       if (!currentUser && (['/', '/login', '/logout', '/signup'].indexOf($location.path()) === -1)) {
         Auth.currentUser();
