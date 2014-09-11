@@ -16,8 +16,8 @@ exports.run = function (req, res) {
   docker.createContainer({'Image': 'whim/node'}, function (err, container) {
     Container.findOne({'cid': cid}, function(err, dataContainer){
       dataContainer.worker = {
-        id: container.id.substr(0,8);
-        status: 'running';
+        id: container.id.substr(0,8),
+        status: 'running'
       };
       dataContainer.save();
     });
@@ -33,7 +33,7 @@ exports.run = function (req, res) {
 
 exports.read = function (req, res) {
   var cid = req.param('id');
-  
+
   docker.getContainer(cid, function(err, data){
     res.json(data);
   });
