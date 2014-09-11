@@ -25,23 +25,25 @@ exports.run = function (req, res) {
         res.json({error: true, message: 'The application is already running'});
       } else {
         docker.createContainer({'Image': 'whim/node'}, function (err, container) {
-
+          dataContainer.worker = {
+            id: container.id.substr(0, 12),
+            status: 'running'
+          };
+          dataContainer.save();
           
-
           container.attach({stream: true, stdout: true, stderr: true, tty: true}, function (err, stream) {
             stream.pipe(process.stdout);
             container.start({'VolumesFrom': cid, 'PublishAllPorts': true}, function (err, data) {
               console.log(data);
             });
             docker.getContainer(dataContainer.worker.id).inspect(function (err, data) {
-              res.json(data);
-              // dataContainer.worker = {
-              //   id: container.id.substr(0, 12),
-              //   status: 'running',
-              //   app: data.NetworkSettings.Ports['5000/tcp'][0].HostPort,
-              //   term: data.NetworkSettings.Ports['8080/tcp'][0].HostPort
-              // };
-              // dataContainer.save();
+              dataContainer.worker = {
+                app: data.NetworkSettings.Ports['5000/tcp'][0].HostPort,
+                term: data.NetworkSettings.Ports['8080/tcp'][0].HostPort
+              };
+              dataContainer.save();
+              res.json(dataContainer);
+              
             });
           });
         });
