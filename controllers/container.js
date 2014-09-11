@@ -34,13 +34,14 @@ exports.run = function (req, res) {
               console.log(data);
             });
             docker.getContainer(dataContainer.worker.id).inspect(function (err, data) {
-              dataContainer.worker = {
-                id: container.id.substr(0, 12),
-                status: 'running',
-                app: data.NetworkSettings.Ports['5000/tcp'][0].HostPort,
-                term: data.NetworkSettings.Ports['8080/tcp'][0].HostPort
-              };
-              dataContainer.save();
+              res.json(data);
+              // dataContainer.worker = {
+              //   id: container.id.substr(0, 12),
+              //   status: 'running',
+              //   app: data.NetworkSettings.Ports['5000/tcp'][0].HostPort,
+              //   term: data.NetworkSettings.Ports['8080/tcp'][0].HostPort
+              // };
+              // dataContainer.save();
             });
           });
         });
