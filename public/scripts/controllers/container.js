@@ -21,6 +21,7 @@ angular.module('whimApp')
 
     $scope.runContainer = function() {
       Container.run({id: $scope.container.cid}, function (container) {
+        console.log(container);
         $scope.container = container;
       });
     };
