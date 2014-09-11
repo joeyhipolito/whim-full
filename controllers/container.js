@@ -11,12 +11,16 @@ exports.query = function (req, res) {
 }
 
 exports.run = function (req, res) {
-  var dataContainer = req.param('id');
+  var cid = req.param('id');
   docker.createContainer({'Image': 'whim/node'}, function (err, container) {
-    res.json(container);
+    Container.find({'cid': cid}, function(err, dataContainer){
+      dataContainer.worker = container.id.substr(0,8);
+      dataContainer.save();
+    });
+    res.json({worker: container.id});
     container.attach({stream: true, stdout: true, stderr: true, tty: true}, function (err, stream) {
       stream.pipe(process.stdout);
-      container.start({'VolumesFrom': dataContainer, 'PublishAllPorts': true}, function (err, data) {
+      container.start({'VolumesFrom': cid, 'PublishAllPorts': true}, function (err, data) {
         console.log(data);
       });
     })
@@ -24,6 +28,6 @@ exports.run = function (req, res) {
 };
 
 exports.read = function (req, res) {
-  var dataContainer = req.param('id');
+  var cid = req.param('id');
   
 }
