@@ -101,7 +101,6 @@ angular
 
   })
   .run(function ($rootScope, $location, Auth, $ionicLoading) {
-    $ionicLoading.hide();
     $rootScope.$watch('currentUser', function(currentUser){
       if (!currentUser && (['/', '/login', '/logout', '/signup'].indexOf($location.path()) === -1)) {
         Auth.currentUser();
@@ -109,7 +108,7 @@ angular
     });
 
     $rootScope.$on('event:auth-loginRequired', function () {
-      console.log('auth-loginRequired');
+      $ionicLoading.hide();
       $location.path('/');
       return false;
     })
