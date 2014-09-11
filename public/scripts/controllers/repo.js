@@ -35,10 +35,10 @@ angular.module('whimApp')
             text: '<b>Clone</b>',
             type: 'button-positive',
             onTap: function(e) {
-              if (!$scope.container.cid) {
+              if (!$scope.container.name) {
                 e.preventDefault();
               } else {
-                Repo.save({'name': $scope.container.cid, 'url': repoUrl}, function(container) {
+                Repo.save({'name': $scope.container.name, 'url': repoUrl}, function(container) {
                   if (container.error) {
                     $ionicPopup.alert({
                       title: 'Ooooops!!!',
