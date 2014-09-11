@@ -16,7 +16,7 @@
       <div class="b-list-group__item b-list-group__parent b-list-parent">
         <ul class="b-list-child">
           <li class="b-list-child__item white" ng-repeat="container in containers" ng-show="container.name">
-            <a href="" ng-click="selectContainer($index, container.cid)">
+            <a href="" ng-href="/#/container/{{container.cid}}">
               <span class="b-media">
                 {{container.name}}
                 <i class="b-media__icon b-media__icon--medium b-media__icon--right ion-fireball" ng-class="{'w-container__icon--active': container.worker.status == 'running'}" ng-cloak></i>

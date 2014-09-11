@@ -44,28 +44,27 @@ angular
     $stateProvider
       .state('container',{
         abstract: true,
-        templateUrl: 'views/templates/left-sidebar.html',
-        resolve: {
-          container: function ($stateParams, Container) {
-            if ($stateParams.id) {
-              return Container.get({id: $stateParams.id});
-            } else {
-              return null;
-            }
-          },
-          containers: function(Container) {
-            return Container.query();
-          }
-        },
-        controller: 'ContainerCtrl'
+        templateUrl: 'views/templates/left-sidebar.html'
       })
       .state('container.containers',{
         url: '/container',
-        templateUrl: 'views/container.html'
+        templateUrl: 'views/container.html',
+        resolve: {
+          containers: function(Container) { // note plural
+            return Container.query();
+          }
+        },
+        controller: 'ContainersCtrl' // note plural
       })
       .state('container.container', {
         url: '/container/:id',
-        templateUrl: 'views/container-single.html'
+        templateUrl: 'views/container-single.html',
+        resolve: {
+          container: function($stateParams, Container) { // note singular
+            return Container.get({id: $stateParams.id});
+          }
+        },
+        controller: 'ContainerCtrl' // note singular
       });
 
     // repository

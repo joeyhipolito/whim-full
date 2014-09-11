@@ -7,7 +7,7 @@
   <ion-header-bar class="b-header-bar" align-title="left">
     <span ng-click="back()" class="b-header-bar__button b-header-bar__button--left ion-ios7-arrow-left"></span>
     <h4 class="b-header-bar__title b-media">
-      <i class="b-media__icon b-media__icon--small ion-flask"></i>Containers
+      <i class="b-media__icon b-media__icon--small ion-fireball" ng-class="{'w-container__icon--active': container.worker.status == 'running'}"></i>{{container.name}}
     </h4>
     <span class="b-header-bar__button b-header-bar__button--right ion-ios7-pulse-strong"></span>
   </ion-header-bar>
