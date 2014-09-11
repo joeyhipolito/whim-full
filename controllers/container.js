@@ -13,7 +13,7 @@ exports.query = function (req, res) {
 exports.run = function (req, res) {
   var cid = req.param('id');
   docker.createContainer({'Image': 'whim/node'}, function (err, container) {
-    Container.find({'cid': cid}, function(err, dataContainer){
+    Container.findOne({'cid': cid}, function(err, dataContainer){
       dataContainer.worker = container.id.substr(0,8);
       dataContainer.save();
     });
