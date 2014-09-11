@@ -20,6 +20,7 @@ module.exports = function(app, passport) {
   // app.post('/container', isAuthenticated, container.create);
   app.put('/container/:id', container.run);
   app.get('/container/:id', container.read);
+  app.delete('/container/:id', container.stop);
   
   var repo = require('../controllers/repo');
   app.post('/repo', isAuthenticated, repo.clone);

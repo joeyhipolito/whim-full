@@ -42,6 +42,7 @@ exports.read = function (req, res) {
 
 exports.stop = function (req, res) {
   var cid = req.param('id');
-  
-  
+  docker.getContainer(cid).stop(function(err, data){
+    res.json(data);
+  });
 }
