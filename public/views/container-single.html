@@ -41,7 +41,7 @@
         </h5>
         <h5 class="b-list-group__title b-media" ng-if="container.worker.status == 'stopped'">
           Run
-          <i class="b-media__icon b-media__icon--medium b-media__icon--right ion-play" ng-cloak></i>
+          <i ng-click="runContainer()" class="b-media__icon b-media__icon--medium b-media__icon--right ion-play" ng-cloak></i>
         </h5>
       </div>
       <!-- /.b-list-group__item -->

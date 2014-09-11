@@ -27,16 +27,18 @@ exports.run = function (req, res) {
         docker.createContainer({'Image': 'whim/node'}, function (err, container) {
 
           dataContainer.worker = {
-            id: container.id.substr(0,8),
+            id: container.id.substr(0, 12),
             status: 'running'
           };
           dataContainer.save();
 
-          res.json({worker: container.id});
           container.attach({stream: true, stdout: true, stderr: true, tty: true}, function (err, stream) {
             stream.pipe(process.stdout);
             container.start({'VolumesFrom': cid, 'PublishAllPorts': true}, function (err, data) {
               console.log(data);
+            });
+            docker.getContainer(dataContainer.worker.id).inspect(function (err, data) {
+              res.json(data);
             });
           });
         });
@@ -48,12 +50,12 @@ exports.run = function (req, res) {
 exports.read = function (req, res) {
   var cid = req.param('id');
   Container.findOne({'cid': cid}, function (err, dataContainer) {
-    res.json(dataContainer)
-  });
 
-  // docker.getContainer(cid).inspect(function(err, data){
-  //   res.json(data);
-  // });
+    docker.getContainer(cid).inspect(function(err, data){
+      res.json(data);
+    });
+    // res.json(dataContainer);
+  });
 };
 
 exports.stop = function (req, res) {
@@ -61,6 +63,7 @@ exports.stop = function (req, res) {
   Container.findOne({'cid': cid}, function (err, dataContainer) {
     res.json({
       createdAt: "2014-09-11T08:12:18.856Z",
+      cid: cid,
       name: "helloworld",
       user: "540ea0648949ea5c112b609c",
       worker: {id: "e498fb45", status: "stopped"}

@@ -13,8 +13,14 @@ angular.module('whimApp')
     });
 
     $scope.stopContainer = function () {
-      // console.log($scope.container);
-      Container.delete({id: $scope.container.cid}, function(container){
+      console.log($scope.container);
+      Container.delete({id: $scope.container.cid}, function (container){
+        $scope.container = container;
+      });
+    };
+
+    $scope.runContainer = function() {
+      Container.run({id: $scope.container.cid}, function (container) {
         $scope.container = container;
       });
     };
