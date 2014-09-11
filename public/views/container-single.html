@@ -1,0 +1,35 @@
+<ion-view ion-pane class="b-view">
+  <ion-nav-bar class="b-header-bar">
+    <ion-nav-back-button class="b-back-button">
+      <span class="b-header-bar__button b-header-bar__button--left ion-ios7-arrow-left"></span>
+    </ion-nav-back-button>
+  </ion-nav-bar>
+  <ion-header-bar class="b-header-bar" align-title="left">
+    <span ng-click="back()" class="b-header-bar__button b-header-bar__button--left ion-ios7-arrow-left"></span>
+    <h4 class="b-header-bar__title b-media">
+      <i class="b-media__icon b-media__icon--small ion-flask"></i>Containers
+    </h4>
+    <span class="b-header-bar__button b-header-bar__button--right ion-ios7-pulse-strong"></span>
+  </ion-header-bar>
+  <ion-content class="has-header b-content">
+    <div class="b-list-group">
+      <div class="b-list-group__item b-list-group__parent b-list-parent">
+        <ul class="b-list-child">
+          <li class="b-list-child__item white" ng-repeat="container in containers" ng-show="container.name">
+            <a href="" ng-click="selectContainer($index)">
+              <span class="b-media">
+                {{container.name}}
+                <i class="b-media__icon b-media__icon--medium b-media__icon--right ion-fireball" ng-class="{'w-container__icon--active': container.worker.status == 'running'}" ng-cloak></i>
+              </span>
+            </a>
+          </li>
+          <!-- /.b-list__item b-media white -->
+        </ul>
+        <!-- /.b-list -->
+      </div>
+      <!-- /.b-list-group__item -->
+    </div>
+    <!-- /.b-list-group -->
+
+  </ion-content>
+</ion-view>

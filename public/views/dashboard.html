@@ -7,13 +7,13 @@
     <span class="b-header-bar__button b-header-bar__button--right ion-ios7-pulse-strong"></span>
   </ion-header-bar>
   <ion-content class="has-header b-content">
-    <div class="b-list-group">
+    <div class="b-list-group"  ng-show="user.login">
       <div class="b-list-group__item b-list-group__parent b-list-parent">
         <div class="b-media white b-list-parent__group">
           <span class="b-media__icon b-media__icon--large b-list-parent__icon ion-social-github"></span>
           <h4 class="b-list-parent__title">Github</h4>
         </div>
-        <ul class="b-list-child" ng-show="user.login">
+        <ul class="b-list-child">
           <li class="b-list-child__item white">
             <a href="" ng-href="/#/repo?user={{user.login}}">
               <span class="b-media" ng-cloak><i class="b-media__icon b-media__icon--small ion-ios7-person"></i>{{user.login}}</span>
@@ -38,7 +38,7 @@
           <span class="b-media__icon b-media__icon--large b-list-parent__icon ion-beer"></span>
           <h4 class="b-list-parent__title">Developer's Lab</h4>
         </div>
-        <ul class="b-list-child" ng-show="user.login">
+        <ul class="b-list-child">
           <li class="b-list-child__item white" ng-cloak>
             <a href="" ng-href="/#/repo?org=whim-cloud">
               <span class="b-media"><i class="b-media__icon b-media__icon--small ion-flash"></i>whim-cloud</span>

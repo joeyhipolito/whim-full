@@ -38,16 +38,6 @@ angular
         url: '/account',
         templateUrl: 'views/dashboard.html',
         controller: 'DashboardCtrl'
-      })
-      .state('account.settings', {
-        url: '/settings',
-        templateUrl: 'views/settings.html',
-        controller: 'AccountCtrl',
-        resolve: {
-          user: function(User) {
-            return User.get();
-          }
-        }
       });
 
     // container
@@ -65,7 +55,19 @@ angular
         url: '/container',
         templateUrl: 'views/container.html',
         controller: 'ContainerCtrl'
-      });
+      })
+      .state('container.container', {
+        url: '/container/:id',
+        templateUrl: 'views/container-single.html',
+        resolve: {
+          container: function ($stateParams, Container) {
+            return Container.get({id: $stateParams.id});
+          }
+        },
+        controller: function (container) {
+          console.log(container);
+        }
+      })
 
     // repository
     $stateProvider

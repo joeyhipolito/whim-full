@@ -86,7 +86,7 @@ a, a:link, a:active, a:visited {
   background-size: cover;
   flex: 1;
   -webkit-flex: 1;
-  max-width: 600px;
+  max-width: 100%;
   position: relative;
   overflow: hidden;
 }
@@ -461,6 +461,10 @@ a, a:link, a:active, a:visited {
 
 .medium {
   font-size: 1.2em;
+}
+
+.w-container__icon--active {
+  color: #ffcc00;
 }
 
 /* button animations */
