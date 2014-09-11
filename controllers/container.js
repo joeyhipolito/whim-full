@@ -8,7 +8,7 @@ exports.query = function (req, res) {
   Container.find({'user': req.user._id}, function(err, containers){
     res.json(containers);
   })
-}
+};
 
 exports.run = function (req, res) {
   var cid = req.param('id');
@@ -38,4 +38,10 @@ exports.read = function (req, res) {
   container.inspect(function(err, data){
     res.json(data);
   });
+};
+
+exports.stop = function (req, res) {
+  var cid = req.param('id');
+  
+  
 }
