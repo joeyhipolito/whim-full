@@ -51,10 +51,10 @@ exports.read = function (req, res) {
   var cid = req.param('id');
   Container.findOne({'cid': cid}, function (err, dataContainer) {
 
-    docker.getContainer(cid).inspect(function(err, data){
-      res.json(data);
-    });
-    // res.json(dataContainer);
+    // docker.getContainer(cid).inspect(function(err, data){
+    //   res.json(data);
+    // });
+    res.json(dataContainer);
   });
 };
 
