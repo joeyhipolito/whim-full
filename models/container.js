@@ -5,7 +5,10 @@ var containerSchema = mongoose.Schema({
   name          : String,
   user          : String,
   status        : String,
-  worker        : String,
+  worker        : {
+    id     : { type: String },
+    status : { type: String, default: 'stopped'}
+  },
   createdAt     : { type: Date, default: Date.now }
 });
 
