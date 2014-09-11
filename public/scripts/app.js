@@ -87,6 +87,17 @@ angular
         controller: 'RepoCtrl'
       });
 
+    // console
+    $stateProvider
+      .state('console', {
+        abstract: true,
+        templateUrl: 'views/templates/left-sidebar.html'
+      })
+      .state('console.term', {
+        url: '/console',
+        templateUrl: 'views/console.html'
+      });
+
 
   })
   .run(function ($rootScope, $location, Auth) {
