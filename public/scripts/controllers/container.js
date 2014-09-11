@@ -4,6 +4,10 @@ angular.module('whimApp')
     
     $scope.containers = containers;
 
+    $scope.selectContainer = function (id) {
+      console.log(id);
+    };
+
     $scope.back = function() {
       $ionicNavBarDelegate.back();
     };

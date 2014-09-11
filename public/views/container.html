@@ -16,7 +16,7 @@
       <div class="b-list-group__item b-list-group__parent b-list-parent">
         <ul class="b-list-child">
           <li class="b-list-child__item white" ng-repeat="container in containers" ng-show="container.name">
-            <a href="" ng-href="/#/container/{{container.name}}">
+            <a href="" ng-click="selectContainer(container)">
               <span class="b-media">
                 <i class="b-media__icon b-media__icon--small ion-fireball" ng-cloak></i>
                 {{container.name}}
