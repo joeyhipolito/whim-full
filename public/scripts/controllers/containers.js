@@ -13,4 +13,8 @@ angular.module('whimApp')
       template: loadingText
     });
 
+    $scope.back = function() {
+      $ionicNavBarDelegate.back();
+    };
+
   });
