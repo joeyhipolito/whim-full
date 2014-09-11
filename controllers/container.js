@@ -34,7 +34,8 @@ exports.run = function (req, res) {
 exports.read = function (req, res) {
   var cid = req.param('id');
 
-  docker.getContainer(cid, function(err, data){
+  var container = docker.getContainer(cid);
+  container.inspect(function(err, data){
     res.json(data);
   });
 }
