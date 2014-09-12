@@ -8,7 +8,7 @@ module.exports = function(app, passport) {
 
   /* authentication */
   var session = require('../controllers/session');
-  app.get('/auth/github', passport.authenticate('github', {scope: ['user:email', 'public_repo', 'read:org']}));
+  app.get('/auth/github', passport.authenticate('github', {scope: ['user:email', 'read:org']}));
   app.get('/auth/github/callback', passport.authenticate('github',{successRedirect: '/#/account',failureRedirect: '/'})
   );
   app.get('/auth/session', isAuthenticated, session.session);
