@@ -106,6 +106,22 @@ angular
         controller: 'RepoCtrl'
       });
 
+    $stateProvider
+      .state('feedback', {
+        abstract: true,
+        templateUrl: 'views/templates/left-sidebar.html'
+      })
+      .state('feedback.send', {
+        url: '/feedback',
+        templateUrl: 'views/feedback.html',
+        resolve: {
+          feedback: function(Feedback) {
+            return Feedback.get();
+          }
+        },
+        controller: 'FeedbackCtrl'
+      });
+
   })
   .run(function ($rootScope, $location, Auth, $ionicLoading, whim) {
 

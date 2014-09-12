@@ -1,0 +1,84 @@
+<ion-view ion-pane class="b-view">
+  <ion-nav-bar class="b-header-bar">
+    <ion-nav-back-button class="b-back-button">
+      <span class="b-header-bar__button b-header-bar__button--left ion-ios7-arrow-left"></span>
+    </ion-nav-back-button>
+  </ion-nav-bar>
+  <ion-header-bar class="b-header-bar" align-title="left">
+    <span ng-click="back()" class="b-header-bar__button b-header-bar__button--left ion-ios7-arrow-left"></span>
+    <h4 class="b-header-bar__title b-media">
+      <i class="b-media__icon b-media__icon--small ion-ios7-chatboxes"></i>Send Feedback
+    </h4>
+    <span ng-click="feed()" class="b-header-bar__button b-header-bar__button--right ion-checkmark white">
+      </span>
+  </ion-header-bar>
+  <ion-content class="has-header b-content">
+    <div class="b-list-group">
+      <div class="b-list-group__item">
+        <h5 class="b-list-group__title">Efficiency</h5>
+          <ion-toggle ng-repeat="item in feedback.efficiency"
+                      ng-model="item.checked" 
+                      ng-checked="item.checked">
+            {{ item.text }}
+          </ion-toggle>
+        <!-- /.b-list -->
+      </div>
+      <!-- /.b-list-group__item -->
+    </div>
+    <!-- /.b-list-group -->
+    <div class="b-list-group">
+      <div class="b-list-group__item">
+        <h5 class="b-list-group__title">Effectiveness</h5>
+          <ion-toggle ng-repeat="item in feedback.effectiveness"
+                      ng-model="item.checked" 
+                      ng-checked="item.checked">
+            {{ item.text }}
+          </ion-toggle>
+        <!-- /.b-list -->
+      </div>
+      <!-- /.b-list-group__item -->
+    </div>
+    <!-- /.b-list-group -->
+    <div class="b-list-group">
+      <div class="b-list-group__item">
+        <h5 class="b-list-group__title">Engaging</h5>
+          <ion-toggle ng-repeat="item in feedback.engaging"
+                      ng-model="item.checked" 
+                      ng-checked="item.checked">
+            {{ item.text }}
+          </ion-toggle>
+        <!-- /.b-list -->
+      </div>
+      <!-- /.b-list-group__item -->
+    </div>
+    <!-- /.b-list-group -->
+    <div class="b-list-group">
+      <div class="b-list-group__item">
+        <h5 class="b-list-group__title">Ease of Use</h5>
+          <ion-toggle ng-repeat="item in feedback.ease"
+                      ng-model="item.checked" 
+                      ng-checked="item.checked">
+            {{ item.text }}
+          </ion-toggle>
+        <!-- /.b-list -->
+      </div>
+      <!-- /.b-list-group__item -->
+    </div>
+    <!-- /.b-list-group -->
+    <div class="b-list-group">
+      <div class="b-list-group__item">
+        <h5 class="b-list-group__title">Error Tolerant</h5>
+          <ion-toggle ng-repeat="item in feedback.tolerant"
+                      ng-model="item.checked" 
+                      ng-checked="item.checked">
+            {{ item.text }}
+          </ion-toggle>
+        <!-- /.b-list -->
+      </div>
+      <!-- /.b-list-group__item -->
+    </div>
+    <!-- /.b-list-group -->
+
+    
+  </ion-content>
+</ion-view>

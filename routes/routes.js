@@ -29,7 +29,7 @@ module.exports = function(app, passport) {
   var user = require('../controllers/user');
   app.get('/user', isAuthenticated, user.read);
   app.get('/user/orgs', isAuthenticated, user.orgs);
-  
+   
   // repo [user, org]
   var org = require('../controllers/org');
   // repo: user
@@ -37,6 +37,9 @@ module.exports = function(app, passport) {
   // repo: org
   app.get('/org/:login/repos', isAuthenticated, org.repos);
 
+  var feedback = require('../controllers/feedback');
+  app.get('/feedback', isAuthenticated, feedback.read);
+  app.post('/feedback', isAuthenticated, feedback.feed);
 
   // index
   app.get('/*', function(req, res){

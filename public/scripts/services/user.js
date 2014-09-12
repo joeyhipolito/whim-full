@@ -28,6 +28,12 @@ angular.module('whimApp')
           params: {
             docController: 'orgs'
           }
+        },
+        feedback: {
+          method: 'GET',
+          params: {
+            docController: 'feedback'
+          }
         }
       }
     );

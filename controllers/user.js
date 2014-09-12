@@ -1,6 +1,7 @@
 'use strict';
 
 var github = require('octonode');
+var User = require('../models/user');
 
 exports.read = function (req, res) {
   var client = github.client(req.user.token);
