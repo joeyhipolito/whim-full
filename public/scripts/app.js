@@ -75,10 +75,14 @@ angular
       .state('console.terminal', {
         url: '/console',
         templateUrl: 'views/console.html',
-        controller: function($scope, $sce, Console) {
+        controller: function($scope, $sce, Console, $ionicNavBarDelegate) {
           console.log(Console.getTermPort());
           $scope.term = $scope.domain + ':' + Console.getTermPort();
           $scope.term = $sce.trustAsResourceUrl($scope.term);
+
+          $scope.back = function() {
+            $ionicNavBarDelegate.back();
+          };
         }
       });
 
