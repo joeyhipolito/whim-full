@@ -54,10 +54,6 @@ exports.run = function (req, res) {
 exports.read = function (req, res) {
   var cid = req.param('id');
   Container.findOne({'cid': cid}, function (err, dataContainer) {
-
-    // docker.getContainer(cid).inspect(function(err, data){
-    //   res.json(data);
-    // });
     res.json(dataContainer);
   });
 };
@@ -65,19 +61,29 @@ exports.read = function (req, res) {
 exports.stop = function (req, res) {
   var cid = req.param('id');
   Container.findOne({'cid': cid}, function (err, dataContainer) {
-    res.json({
-      createdAt: "2014-09-11T08:12:18.856Z",
-      cid: cid,
-      name: "helloworld",
-      user: "540ea0648949ea5c112b609c",
-      worker: {id: "e498fb45", status: "stopped"}
-    });
+    if (err) {
+      res.json({
+        error: true,
+        message: err
+      });
+    }
+    if (dataContainer) {
+      if (dataContainer.worker.status === 'stopped') {
+        res.json({error: true, message: 'The application is not running'});
+      } else {
+        docker.getContainer(dataContainer.worker.id).stop(function(err){
+          dataContainer.worker.status = 'stopped';
+          dataContainer.worker.app = null;
+          dataContainer.worker.term = null;
+          dataContainer.save(function (err, doc){
+            res.json(doc);
+            docker.getContainer(doc.worker.id).remove(function (err, data) {
+              console.log(data);
+            });
+          });
+        });
+      }
+    }
   });
-  // docker.getContainer(cid).stop(function(err){
-  //   if (err !== null) {
-  //     res.json({stopped: true});
-  //   } else {
-  //     res.json({stopped: false});
-  //   }
-  // });
+  
 }

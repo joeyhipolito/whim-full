@@ -67,6 +67,21 @@ angular
         controller: 'ContainerCtrl' // note singular
       });
 
+    $stateProvider
+      .state('console', {
+        abstract: true,
+        templateUrl: 'views/templates/left-sidebar.html'
+      })
+      .state('console.terminal', {
+        url: '/console',
+        templateUrl: 'views/console.html',
+        controller: function($scope, $sce, Console) {
+          console.log(Console.getTermPort());
+          $scope.term = $scope.domain + ':' + Console.getTermPort();
+          $scope.term = $sce.trustAsResourceUrl($scope.term);
+        }
+      });
+
     // repository
     $stateProvider
       .state('repository', {
@@ -86,18 +101,6 @@ angular
         },
         controller: 'RepoCtrl'
       });
-
-    // console
-    $stateProvider
-      .state('console', {
-        abstract: true,
-        templateUrl: 'views/templates/left-sidebar.html'
-      })
-      .state('console.term', {
-        url: '/console',
-        templateUrl: 'views/console.html'
-      });
-
 
   })
   .run(function ($rootScope, $location, Auth, $ionicLoading, whim) {

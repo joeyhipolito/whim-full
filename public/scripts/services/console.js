@@ -1,16 +1,29 @@
 angular.module('whimApp')
-  .factory('Console', function () {
-    var appPort = 49000;
-    var termPort = 49000;
+  .service('Console', function () {
+    var appPort = null;
+    var termPort = null;
+
+    var setAppPort = function(port) {
+      appPort = port;
+    }
+
+    var getAppPort = function(port) {
+      return appPort;
+    }
+
+    var setTermPort = function(port) {
+      termPort = port;
+    }
+
+    var getTermPort = function(port) {
+      return termPort;
+    }
 
     return {
-      app: appPort,
-      term: termPort,
-      setAppPort: function (port) {
-        appPort = port; 
-      },
-      setTermPort: function (port) {
-        termPort = port;
-      }
+      getAppPort: getAppPort,
+      setAppPort: setAppPort,
+      getTermPort: getTermPort,
+      setTermPort: setTermPort  
     }
+
   });

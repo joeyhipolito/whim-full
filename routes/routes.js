@@ -18,9 +18,9 @@ module.exports = function(app, passport) {
   var container = require('../controllers/container');
   app.get('/container', isAuthenticated, container.query);
   // app.post('/container', isAuthenticated, container.create);
-  app.put('/container/:id/run', container.run);
-  app.get('/container/:id', container.read);
-  app.delete('/container/:id', container.stop);
+  app.put('/container/:id/run', isAuthenticated, container.run);
+  app.get('/container/:id', isAuthenticated, container.read);
+  app.delete('/container/:id', isAuthenticated, container.stop);
   
   var repo = require('../controllers/repo');
   app.post('/repo', isAuthenticated, repo.clone);

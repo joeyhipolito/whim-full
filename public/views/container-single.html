@@ -9,9 +9,9 @@
     <h4 class="b-header-bar__title b-media">
       <i class="b-media__icon b-media__icon--small ion-fireball" ng-class="{'w-container__icon--active': container.worker.status == 'running'}"></i>{{container.name}}
     </h4>
-    <span class="b-header-bar__button b-header-bar__button--right">
+    <a ng-href="/#/console" class="b-header-bar__button b-header-bar__button--right">
       <img src="images/ssh-terminal.png" alt="">
-    </span>
+    </a>
   </ion-header-bar>
   <ion-content class="has-header b-content">
     <div class="b-list-group">
