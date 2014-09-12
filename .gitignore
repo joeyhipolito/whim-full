@@ -1,4 +1,5 @@
 node_modules
 public/vendors
+public/scripts/services/config.js
 config/auth.js
 config/db.js
