@@ -1,6 +1,6 @@
 'use strict';
 angular.module('whimApp')
-  .controller('ContainerCtrl', function ($scope, $ionicNavBarDelegate, $ionicLoading, container, Container) {
+  .controller('ContainerCtrl', function ($scope, $ionicNavBarDelegate, $ionicLoading, container, Container, Console) {
     
     var loadingText = 'Loading container info...';
     container.$promise.then(function (container) {
@@ -21,8 +21,9 @@ angular.module('whimApp')
 
     $scope.runContainer = function() {
       Container.run({id: $scope.container.cid}, function (container) {
-        console.log(container);
         $scope.container = container;
+        Console.setAppPort(container.worker.app);
+        Console.setTermPort(container.worker.term);
       });
     };
 

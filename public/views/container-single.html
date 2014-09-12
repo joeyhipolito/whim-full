@@ -53,8 +53,12 @@
         <ul class="b-list">
           <li class="b-list__item b-nav-list__item b-media white" ng-show="container.worker.app">
             <span class="b-media__icon b-media__icon--medium ion-ios7-eye-outline"></span>
-            <span class="b-media__text">App Url: {{container.worker.app}}</span>
+            <a ng-href="{{domain}}:{{container.worker.app}}" class="b-media__text">App Url: {{domain}}:{{container.worker.app}}</span>
           </li>
+          <!-- <li class="b-list__item b-nav-list__item b-media white" ng-show="container.worker.app">
+            <span class="b-media__icon b-media__icon--medium ion-ios7-eye-outline"></span>
+            <span class="b-media__text">Term Url: {{domain}}:{{container.worker.term}}</span>
+          </li> -->
           <!-- /.b-list__item b-media white -->
         </ul>
         <!-- /.b-list -->

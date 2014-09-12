@@ -38,10 +38,8 @@ exports.run = function (req, res) {
             });
             docker.getContainer(dataContainer.worker.id).inspect(function (err, data) {
               console.log(data);
-              dataContainer.worker = {
-                app: data.NetworkSettings.Ports['5000/tcp'][0].HostPort,
-                term: data.NetworkSettings.Ports['8080/tcp'][0].HostPort
-              };
+              dataContainer.worker.app = data.NetworkSettings.Ports['5000/tcp'][0].HostPort;
+              dataContainer.worker.term = data.NetworkSettings.Ports['8080/tcp'][0].HostPort;
               dataContainer.save();
               res.json(dataContainer);
               
