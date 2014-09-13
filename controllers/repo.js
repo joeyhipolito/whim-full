@@ -5,7 +5,7 @@ var Docker = require('dockerode');
 var docker = new Docker({socketPath: '/var/run/docker.sock'});
 
 exports.clone = function(req, res) {
-  Container.findOne({'name' : req.user.username + '-' + req.body.name}, function(err, container) {
+  Container.findOne({'name' : req.body.name}, function(err, container) {
     if (err) {
       res.json({error: err});
     }
