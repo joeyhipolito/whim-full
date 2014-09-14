@@ -25,7 +25,9 @@ exports.run = function (req, res) {
             });
 
             docker.getContainer(dataContainer.term.id).inspect(function (err, data){
-              console.log(data);
+              console.log('inspect data here');
+              console.log(data.NetworkSettings);
+              console.log(data.NetworkSettings.Ports['8080/tcp']);;
               dataContainer.term.port = data.NetworkSettings.Ports['8080/tcp'][0].HostPort;
               dataContainer.save();
               res.json(dataContainer);

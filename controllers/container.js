@@ -21,6 +21,7 @@ exports.run = function (req, res) {
       } else {
         console.log('not created yet');
         docker.createContainer({'Image': 'whim/npm:start'}, function (err, container) {
+          console.log(container);
           dataContainer.app.id = container.id.substr(0,12);
           dataContainer.app.status = 'running';
           dataContainer.save();
@@ -31,7 +32,9 @@ exports.run = function (req, res) {
               console.log(data);
             });
             docker.getContainer(dataContainer.app.id).inspect(function (err, data) {
-              console.log(data);
+              console.log('inspect data here');
+              console.log(data.NetworkSettings);
+              console.log(data.NetworkSettings.Ports['5000/tcp']);
               dataContainer.app.port = data.NetworkSettings.Ports['5000/tcp'][0].HostPort;
               dataContainer.save();
               res.json(dataContainer);
