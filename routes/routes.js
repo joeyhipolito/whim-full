@@ -21,6 +21,11 @@ module.exports = function(app, passport) {
   app.put('/container/:id/run', isAuthenticated, container.run);
   app.get('/container/:id', isAuthenticated, container.read);
   app.delete('/container/:id', isAuthenticated, container.stop);
+
+  var terminal = require('../controllers/terminal');
+  app.put('/terminal/:id/run', isAuthenticated, terminal.run);
+  // app.put('/terminal', isAuthenticated, terminal.restart);
+  app.delete('/terminal/:id', isAuthenticated, terminal.stop);
   
   var repo = require('../controllers/repo');
   app.post('/repo', isAuthenticated, repo.clone);

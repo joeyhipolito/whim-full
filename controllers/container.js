@@ -7,42 +7,34 @@ var docker = new Docker({socketPath: '/var/run/docker.sock'});
 exports.query = function (req, res) {
   Container.find({'user': req.user._id}, function(err, containers){
     res.json(containers);
-  })
+  });
 };
 
 exports.run = function (req, res) {
-  var cid = req.param('id');
+  var dataContainerID = req.param('id');
   
-  Container.findOne({'cid': cid}, function(err, dataContainer){
-    if (err) {
-      res.json({
-        error: true,
-        message: err
-      });
-    }
+  Container.findOne({'cid': dataContainerID}, function(err, dataContainer){
+    if (err) { res.json({ error: err })};
     if (dataContainer) {
-      if (dataContainer.worker.status === 'running') {
-        res.json({error: true, message: 'The application is already running'});
+      if (dataContainer.app.status === 'running') {
+        res.json({error: 'The application is already running'});
       } else {
-        docker.createContainer({'Image': 'whim/node'}, function (err, container) {
-          dataContainer.worker = {
-            id: container.id.substr(0, 12),
-            status: 'running'
-          };
+        console.log('not created yet');
+        docker.createContainer({'Image': 'whim/npm:start'}, function (err, container) {
+          dataContainer.app.id = container.id.substr(0,12);
+          dataContainer.app.status = 'running';
           dataContainer.save();
           
           container.attach({stream: true, stdout: true, stderr: true, tty: true}, function (err, stream) {
             stream.pipe(process.stdout);
-            container.start({'VolumesFrom': cid, 'PublishAllPorts': true}, function (err, data) {
+            container.start({'VolumesFrom': dataContainerID, 'PublishAllPorts': true}, function (err, data) {
               console.log(data);
             });
-            docker.getContainer(dataContainer.worker.id).inspect(function (err, data) {
+            docker.getContainer(dataContainer.app.id).inspect(function (err, data) {
               console.log(data);
-              dataContainer.worker.app = data.NetworkSettings.Ports['5000/tcp'][0].HostPort;
-              dataContainer.worker.term = data.NetworkSettings.Ports['8080/tcp'][0].HostPort;
+              dataContainer.app.port = data.NetworkSettings.Ports['5000/tcp'][0].HostPort;
               dataContainer.save();
               res.json(dataContainer);
-              
             });
           });
         });
@@ -59,25 +51,20 @@ exports.read = function (req, res) {
 };
 
 exports.stop = function (req, res) {
-  var cid = req.param('id');
-  Container.findOne({'cid': cid}, function (err, dataContainer) {
-    if (err) {
-      res.json({
-        error: true,
-        message: err
-      });
-    }
+  var dataContainerID = req.param('id');
+
+  Container.findOne({'cid': dataContainerID}, function (err, dataContainer) {
+    if (err) { res.json({ error: err })};
     if (dataContainer) {
-      if (dataContainer.worker.status === 'stopped') {
-        res.json({error: true, message: 'The application is not running'});
+      if (dataContainer.app.status === 'stopped') {
+        res.json({error: 'The application is not running'});
       } else {
-        docker.getContainer(dataContainer.worker.id).stop(function(err){
-          dataContainer.worker.status = 'stopped';
-          dataContainer.worker.app = null;
-          dataContainer.worker.term = null;
-          dataContainer.save(function (err, doc){
-            res.json(doc);
-            docker.getContainer(doc.worker.id).remove(function (err, data) {
+        docker.getContainer(dataContainer.app.id).stop(function (err) {
+          dataContainer.app.status = 'stopped';
+          dataContainer.app.port = null;
+          dataContainer.save(function (err, dataContainer) {
+            res.json(dataContainer);
+            docker.getContainer(dataContainer.app.id).remove(function (err, data) {
               console.log(data);
             });
           });
@@ -85,5 +72,4 @@ exports.stop = function (req, res) {
       }
     }
   });
-  
 }

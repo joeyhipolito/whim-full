@@ -314,6 +314,7 @@ a, a:link, a:active, a:visited {
 .b-term-iframe {
   width: 100%;
   height: 100%;
+  background: #1e1b19;
 }
 
 /* utils */
@@ -475,6 +476,17 @@ a, a:link, a:active, a:visited {
 
 .w-container__control--stopped {
   color: #cc3238;
+}
+
+.w-terminal-footer {
+  height: 330px;
+  padding: 0;
+  border-top: none !important;
+}
+
+.b-footer-group {
+  width: 100%;
+  height: 100%;
 }
 
 /* button animations */

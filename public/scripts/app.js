@@ -12,7 +12,6 @@ angular
 
     $urlRouterProvider.otherwise('/');
 
-
     $stateProvider
       .state('home', {
         url: '/',
@@ -76,7 +75,6 @@ angular
         url: '/console',
         templateUrl: 'views/console.html',
         controller: function($scope, $sce, Console, $ionicNavBarDelegate) {
-          console.log(Console.getTermPort());
           $scope.term = $scope.domain + ':' + Console.getTermPort();
           $scope.term = $sce.trustAsResourceUrl($scope.term);
 
@@ -84,6 +82,12 @@ angular
             $ionicNavBarDelegate.back();
           };
         }
+      });
+
+    $stateProvider
+      .state('terminal', {
+        url:'/terminal',
+        templateUrl: 'views/terminal.html'
       });
 
     // repository

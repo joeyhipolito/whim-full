@@ -7,7 +7,7 @@
   <ion-header-bar class="b-header-bar" align-title="left">
     <span ng-click="back()" class="b-header-bar__button b-header-bar__button--left ion-ios7-arrow-left"></span>
     <h4 class="b-header-bar__title b-media">
-      <i class="b-media__icon b-media__icon--small ion-fireball" ng-class="{'w-container__icon--active': container.worker.status == 'running'}"></i>{{container.name}}
+      <i class="b-media__icon b-media__icon--small ion-fireball" ng-class="{'w-container__icon--active': container.app.status == 'running'}"></i>{{container.name}}
     </h4>
     <a ng-href="/#/console" class="b-header-bar__button b-header-bar__button--right">
       <img src="images/ssh-terminal.png" alt="">
@@ -26,46 +26,41 @@
             <span class="b-media__icon b-media__icon--medium ion-ios7-person-outline"></span>
             <span class="b-media__text">Owner: {{currentUser.name}}</span>
           </li>
-          <!-- /.b-list__item b-media white -->
-        </ul>
-        <!-- /.b-list -->
-      </div>
-      <!-- /.b-list-group__item -->
-    </div>
-    <!-- /.b-list-group -->
-    <div class="b-list-group">
-      <div class="b-list-group__item">
-        <h5 class="b-list-group__title b-media" ng-if="container.worker.status == 'running'">
-          Stop
-          <i ng-click="stopContainer()" class="b-media__icon b-media__icon--medium b-media__icon--right ion-stop w-container__control--stopped" ng-cloak></i>
-        </h5>
-        <h5 class="b-list-group__title b-media" ng-if="container.worker.status == 'stopped'">
-          Run
-          <i ng-click="runContainer()" class="b-media__icon b-media__icon--medium b-media__icon--right ion-play" ng-cloak></i>
-        </h5>
-      </div>
-      <!-- /.b-list-group__item -->
-    </div>
-    <!-- /.b-list-group -->
-    <div class="b-list-group">
-      <div class="b-list-group__item">
-        <h5 class="b-list-group__title">Network info</h5>
-        <ul class="b-list">
-          <li class="b-list__item b-nav-list__item b-media white" ng-show="container.worker.app">
-            <span class="b-media__icon b-media__icon--medium ion-ios7-eye-outline"></span>
-            <a ng-href="{{domain}}:{{container.worker.app}}" class="b-media__text">App Url: {{domain}}:{{container.worker.app}}</span>
+          <li class="b-list__item b-media white">
+            <span class="b-media__icon b-media__icon--medium ion-ios7-bolt" ng-class="{'w-container__icon--active': container.app.status == 'running'}"></span>
+            <span class="b-media__text">Status: {{container.app.status}}</span>
+            <i ng-show="container.app.status === 'running'" ng-click="stopApplication()" class="b-media__icon b-media__icon--medium b-media__icon--right ion-ios7-pause w-container__control--stopped" ng-cloak></i>
+            <i ng-show="container.app.status === 'stopped'"ng-click="runApplication()" class="b-media__icon b-media__icon--medium b-media__icon--right ion-ios7-play" ng-cloak></i>
           </li>
-          <!-- <li class="b-list__item b-nav-list__item b-media white" ng-show="container.worker.app">
-            <span class="b-media__icon b-media__icon--medium ion-ios7-eye-outline"></span>
-            <span class="b-media__text">Term Url: {{domain}}:{{container.worker.term}}</span>
-          </li> -->
           <!-- /.b-list__item b-media white -->
         </ul>
         <!-- /.b-list -->
+      </div>
+      <!-- /.b-list-group__item -->
+    </div>
+    <!-- /.b-list-group -->
+    <div class="b-list-group" ng-show="container.app.port">
+      <div class="b-list-group__item">
+        <h5 class="b-list-group__title">
+          <a ng-href="{{domain}}:{{container.app.port}}" class="b-media">
+            Preview
+            <span class="b-media__icon b-media__icon--medium ion-eye" ng-class="{'w-container__icon--active': container.app.status == 'running'}"></span>
+          </a>
+        </h5>
       </div>
       <!-- /.b-list-group__item -->
     </div>
     <!-- /.b-list-group -->
 
   </ion-content>
+  <ion-footer-bar class="w-terminal-footer">
+    <div class="b-footer-group">
+      <h5 class="b-list-group__title b-media">
+        Terminal ({{container.term.status}})
+        <i ng-show="container.term.status === 'running'" ng-click="stopTerminal()" class="b-media__icon b-media__icon--medium b-media__icon--right ion-ios7-pause w-container__control--stopped" ng-cloak></i>
+        <i ng-show="container.term.status === 'stopped'"ng-click="runTerminal()" class="b-media__icon b-media__icon--medium b-media__icon--right ion-ios7-play" ng-cloak></i>
+      </h5>
+      <iframe id="w-terminal" ng-src="{{term}}" frameborder="0" class="b-term-iframe"></iframe>  
+    </div>
+  </ion-footer-bar>
 </ion-view>
