@@ -7,10 +7,20 @@
   <ion-header-bar class="b-header-bar" align-title="left">
     <span ng-click="back()" class="b-header-bar__button b-header-bar__button--left ion-ios7-arrow-left"></span>
     <h4 class="b-header-bar__title b-media">
-      <i class="b-media__icon b-media__icon--small ion-document"></i>{{active}}
+      <i class="b-media__icon b-media__icon--small ion-document"></i>{{active.name}}
     </h4>
+    <a ng-href="/#/editor" class="b-header-bar__button b-header-bar__button--right">
+      <span class="ion-navicon"></span>
+    </a>
+   
   </ion-header-bar>
   <ion-content class="has-header b-content">
-    <ui-codemirror ui-codemirror-opts="editorOptions"></ui-codemirror>
+    <ui-codemirror ng-repeat="file in openFiles"
+        ui-codemirror-opts="editorOptions"
+        ng-show="file.active == true"
+        ng-model="file.content"
+        class="b-editor vflex">
+    </ui-codemirror>
+    <button ng-click="save()"> Save </button>
   </ion-content>
 </ion-view>

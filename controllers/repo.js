@@ -45,6 +45,12 @@ exports.read = function (req, res) {
   var uri = '/repos/' + req.user.username + '/' + repo + '/contents/' + pathOrFile;
 
   client.get(uri, {}, function (err, status, body, headers) {
+    // res.json(body);
+    if (body.type === 'file') {
+      var buff = new Buffer(body.content, 'base64');
+      body.content  = buff.toString();
+    }
+
     res.json(body);
   });
 }

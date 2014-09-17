@@ -8,7 +8,7 @@ module.exports = function(app, passport) {
 
   /* authentication */
   var session = require('../controllers/session');
-  app.get('/auth/github', passport.authenticate('github', {scope: ['user:email', 'read:org']}));
+  app.get('/auth/github', passport.authenticate('github', {scope: ['user:email', 'read:org', 'repo']}));
   app.get('/auth/github/callback', passport.authenticate('github',{successRedirect: '/#/account',failureRedirect: '/'})
   );
   app.get('/auth/session', isAuthenticated, session.session);
@@ -33,7 +33,7 @@ module.exports = function(app, passport) {
 
   // file
   var file = require('../controllers/file');
-  app.get('/file/:id', file.read);
+  app.put('/file/:id', file.update);
 
   // user
   var user = require('../controllers/user');
