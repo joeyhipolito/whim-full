@@ -18,7 +18,7 @@
             <span class="b-media__icon b-media__icon_repo b-media__icon--medium">
               <img src="images/logo-inverse.png" alt="">
             </span>
-            <span class="b-media__text b-media__text_repo">{{repo.name}}</span>
+            <a href="" ng-href="#/repo/{{repo.name}}"><span class="b-media__text b-media__text_repo">{{repo.name}}</span></a>
             <span ng-click="clone(repo.clone_url)" class="b-media__icon b-media__icon--right b-media__icon--medium ion-ios7-cloud-download-outline">
             </span>
           </li>

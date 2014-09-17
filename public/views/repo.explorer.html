@@ -1,0 +1,32 @@
+<ion-view ion-pane class="b-view">
+  <ion-nav-bar class="b-header-bar">
+    <ion-nav-back-button class="b-back-button">
+      <span class="b-header-bar__button b-header-bar__button--left ion-ios7-arrow-left"></span>
+    </ion-nav-back-button>
+  </ion-nav-bar>
+  <ion-header-bar class="b-header-bar" align-title="left">
+    <span ng-click="back()" class="b-header-bar__button b-header-bar__button--left ion-ios7-arrow-left"></span>
+    <h4 class="b-header-bar__title b-media">
+      <!-- <i class="b-media__icon b-media__icon--small ion-ios7-person"></i> -->{{title}}
+    </h4>
+  </ion-header-bar>
+  <ion-content class="has-header b-content">
+    <div class="b-list-group">
+      <div class="b-list-group__item">
+        <ul class="b-list">
+          <li class="b-list__item b-media white b-list__item_repo" ng-repeat="file in files" ng-cloak>
+            <span class="b-media__icon b-media__icon_repo b-media__icon--medium">
+              <i ng-class="{'ion-folder': file.type == 'dir', 'ion-document': file.type == 'file'}"></i>
+            </span>
+            <a href="" ng-href="#/repo/{{repo}}?filepath={{file.path}}"><span class="b-media__text b-media__text_repo">{{file.name}}</span></a>
+          </li>
+          <!-- /.b-list__item b-media white -->
+        </ul>
+        <!-- /.b-list -->
+      </div>
+      <!-- /.b-list-group__item -->
+    </div>
+    <!-- /.b-list-group -->
+
+  </ion-content>
+</ion-view>

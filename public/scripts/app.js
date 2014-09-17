@@ -108,6 +108,34 @@ angular
           }
         },
         controller: 'RepoCtrl'
+      })
+      .state('repository.explorer', {
+        url: '/repo/:id?filepath',
+        templateUrl: 'views/repo.explorer.html',
+        resolve: {
+          repo: function($stateParams) {
+            return $stateParams.id;
+          },
+          path: function($stateParams) {
+            return $stateParams.filepath;
+          },
+          file: function(Repo, path, repo) {
+            return Repo.query({id: repo, file: path});
+          }
+        },
+        controller: function ($scope, repo, path, file) {
+          $scope.repo = repo;
+          $scope.path = path;
+          if (!path || path === '' || path === undefined) {
+            $scope.title = repo;
+          } else {
+            $scope.title = repo + '/' + path;
+          }
+
+          file.$promise.then(function (re) {
+            $scope.files = re;
+          });
+        }
       });
 
     $stateProvider

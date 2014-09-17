@@ -3,6 +3,7 @@
 var Container = require('../models/container');
 var Docker = require('dockerode');
 var docker = new Docker({socketPath: '/var/run/docker.sock'});
+var github = require('octonode');
 
 exports.clone = function(req, res) {
   Container.findOne({'name' : req.body.name}, function(err, container) {
@@ -35,7 +36,17 @@ exports.clone = function(req, res) {
       });
     }
   });
+}
 
+exports.read = function (req, res) {
+  var repo = req.param('id');
+  var pathOrFile = req.param('file') || '';
+  var client = github.client(req.user.token);
+  var uri = '/repos/' + req.user.username + '/' + repo + '/contents/' + pathOrFile;
+
+  client.get(uri, {}, function (err, status, body, headers) {
+    res.json(body);
+  });
 }
 
 
