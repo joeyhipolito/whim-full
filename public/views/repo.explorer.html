@@ -18,7 +18,12 @@
             <span class="b-media__icon b-media__icon_repo b-media__icon--medium">
               <i ng-class="{'ion-folder': file.type == 'dir', 'ion-document': file.type == 'file'}"></i>
             </span>
-            <a href="" ng-href="#/repo/{{repo}}?filepath={{file.path}}"><span class="b-media__text b-media__text_repo">{{file.name}}</span></a>
+            <a ng-if="file.type == 'dir'" href="" ng-href="#/repo/{{repo}}?filepath={{file.path}}">
+              <span class="b-media__text b-media__text_repo">{{file.name}}</span>
+            </a>
+             <a ng-if="file.type == 'file'" href="" ng-href="#/file?repo={{repo}}&path={{file.path}}">
+              <span class="b-media__text b-media__text_repo">{{file.name}}</span>
+            </a>
           </li>
           <!-- /.b-list__item b-media white -->
         </ul>

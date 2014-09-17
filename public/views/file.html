@@ -1,0 +1,50 @@
+<ion-view ion-pane class="b-view">
+  <ion-nav-bar class="b-header-bar">
+    <ion-nav-back-button class="b-back-button">
+      <span class="b-header-bar__button b-header-bar__button--left ion-ios7-arrow-left"></span>
+    </ion-nav-back-button>
+  </ion-nav-bar>
+  <ion-header-bar class="b-header-bar" align-title="left">
+    <span ng-click="back()" class="b-header-bar__button b-header-bar__button--left ion-ios7-arrow-left"></span>
+    <h4 class="b-header-bar__title b-media">
+      <!-- <i class="b-media__icon b-media__icon--small ion-ios7-person"></i> -->{{file.name}}
+    </h4>
+    <a ng-click="openFile()" ng-href="/#/editor" class="b-header-bar__button b-header-bar__button--right">
+      <span class="ion-compose"></span>
+    </a>
+  </ion-header-bar>
+  <ion-content class="has-header b-content" ng-show="file">
+    <div class="b-list-group">
+      <div class="b-list-group__item">
+        <h5 class="b-list-group__title">File Info</h5>
+        <ul class="b-list">
+          <li class="b-list__item b-media white">
+            <span class="b-media__icon b-media__icon--medium ion-document"></span>
+            <span class="b-media__text">Filename: {{file.name}}</span>
+          </li>
+          <li class="b-list__item b-media white">
+            <span class="b-media__icon b-media__icon--medium ion-grid"></span>
+            <span class="b-media__text">Size: {{file.size}} bytes</span>
+          </li>
+          <!-- /.b-list__item b-media white -->
+        </ul>
+        <!-- /.b-list -->
+      </div>
+      <!-- /.b-list-group__item -->
+    </div>
+    <!-- /.b-list-group -->
+    <div class="b-list-group" ng-show="container.app.port">
+      <div class="b-list-group__item">
+        <h5 class="b-list-group__title">
+          <a ng-href="{{domain}}:{{container.app.port}}" class="b-media">
+            Preview
+            <span class="b-media__icon b-media__icon--medium ion-eye" ng-class="{'w-container__icon--active': container.app.status == 'running'}"></span>
+          </a>
+        </h5>
+      </div>
+      <!-- /.b-list-group__item -->
+    </div>
+    <!-- /.b-list-group -->
+
+  </ion-content>
+</ion-view>

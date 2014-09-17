@@ -123,19 +123,29 @@ angular
             return Repo.query({id: repo, file: path});
           }
         },
-        controller: function ($scope, repo, path, file) {
-          $scope.repo = repo;
-          $scope.path = path;
-          if (!path || path === '' || path === undefined) {
-            $scope.title = repo;
-          } else {
-            $scope.title = repo + '/' + path;
-          }
+        controller: 'RepoExplorerCtrl'
+      });
 
-          file.$promise.then(function (re) {
-            $scope.files = re;
-          });
-        }
+    $stateProvider
+      .state('file', {
+        abstract: true,
+        templateUrl: 'views/templates/left-sidebar.html'
+      })
+      .state('file.read', {
+        url: '/file?repo&path',
+        templateUrl: 'views/file.html',
+        controller: 'FileCtrl'
+      });
+
+    $stateProvider
+      .state('editor', {
+        abstract: true,
+        templateUrl: 'views/templates/left-sidebar.html'
+      })
+      .state('editor.run', {
+        url: '/editor',
+        templateUrl: 'views/editor.html',
+        controller: 'EditorCtrl'
       });
 
     $stateProvider

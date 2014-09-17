@@ -1,0 +1,16 @@
+<ion-view ion-pane class="b-view">
+  <ion-nav-bar class="b-header-bar">
+    <ion-nav-back-button class="b-back-button">
+      <span class="b-header-bar__button b-header-bar__button--left ion-ios7-arrow-left"></span>
+    </ion-nav-back-button>
+  </ion-nav-bar>
+  <ion-header-bar class="b-header-bar" align-title="left">
+    <span ng-click="back()" class="b-header-bar__button b-header-bar__button--left ion-ios7-arrow-left"></span>
+    <h4 class="b-header-bar__title b-media">
+      <i class="b-media__icon b-media__icon--small ion-document"></i>{{active}}
+    </h4>
+  </ion-header-bar>
+  <ion-content class="has-header b-content">
+    <ui-codemirror ui-codemirror-opts="editorOptions"></ui-codemirror>
+  </ion-content>
+</ion-view>
