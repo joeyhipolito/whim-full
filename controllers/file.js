@@ -10,7 +10,7 @@ exports.update = function (req, res) {
   var commit = req.body.commit;
 
   var client = github.client(req.user.token);
-  var uri = '/repos/' + req.user.username + '/' + repo + '/contents/' + file;
+  var uri = '/repos/' + req.user.username + '/' + repo + '/contents/' + file + '?ref=master';
 
   var ghRepo = client.repo(req.user.username + '/' + repo);
 
