@@ -15,8 +15,10 @@ exports.run = function (req, res) {
   
   Container.findOne({'cid': dataContainerID}, function(err, dataContainer){
     if (err) { res.json({ error: err })};
+    console.log(err);
     if (dataContainer) {
       if (dataContainer.app.status === 'running') {
+        console.log('already running');
         res.json({error: 'The application is already running'});
       } else {
         console.log('not created yet');
@@ -27,17 +29,20 @@ exports.run = function (req, res) {
           dataContainer.save();
           
           container.attach({stream: true, stdout: true, stderr: true, tty: true}, function (err, stream) {
+            console.log('attaching');
             stream.pipe(process.stdout);
             container.start({'VolumesFrom': dataContainerID, 'PublishAllPorts': true}, function (err, data) {
               console.log(data);
             });
+
             docker.getContainer(dataContainer.app.id).inspect(function (err, data) {
               console.log('inspect data here');
               console.log(data.NetworkSettings);
               console.log(data.NetworkSettings.Ports['5000/tcp']);
               dataContainer.app.port = data.NetworkSettings.Ports['5000/tcp'][0].HostPort;
-              dataContainer.save();
-              res.json(dataContainer);
+              dataContainer.save(function(err, data){
+                res.json(dataContainer);
+              });
             });
           });
         });
