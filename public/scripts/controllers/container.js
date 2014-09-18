@@ -45,7 +45,7 @@ angular.module('whimApp')
     $scope.stopTerminal = function () {
       Terminal.delete({id: $scope.container.cid}, function (container){
         $scope.container = container;
-        Console.setTermPort(container.worker.term);
+        Console.setTermPort(container.term.port);
         $scope.term = $scope.domain + ':' + Console.getTermPort();
         $scope.term = $sce.trustAsResourceUrl($scope.term);
       });
