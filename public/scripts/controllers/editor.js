@@ -52,13 +52,14 @@ angular.module('whimApp')
 
                 File.update({id: Editor.getProject(), file: file.path , content: file.content, commit: $scope.commit.message})
                     .$promise.then(function(re) {
-                      $ionicPopup.alert({
-                        title: 'Success!',
-                        subTitle: 'Updated ' + $scope.active.name
-                      });
-                      $scope.commit = '';
                       console.log(re);
-                      $scope.active = re.content;
+                      // $ionicPopup.alert({
+                      //   title: 'Success!',
+                      //   subTitle: 'Updated ' + $scope.active.name
+                      // });
+                      // $scope.commit = '';
+                      // console.log(re);
+                      // $scope.active = re.content;
                     });
               }
             }

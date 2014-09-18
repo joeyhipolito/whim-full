@@ -5,19 +5,20 @@ var github = require('octonode');
 exports.update = function (req, res) {
 
   var repo = req.param('id');
-  var file = req.body.file || '';
+  var pathOrFile = req.body.file || '';
   var content = req.body.content;
   var commit = req.body.commit;
 
   var client = github.client(req.user.token);
-  var uri = '/repos/' + req.user.username + '/' + repo + '/contents/' + file + '?ref=master';
+  // var uri = '/repos/' + req.user.username + '/' + repo + '/contents/' + file;
 
   var ghRepo = client.repo(req.user.username + '/' + repo);
 
-  ghRepo.contents(file, function (err, file) {
+  ghRepo.contents(pathOrFile, function (err, file) {
     if (file.type === 'file') {
-      var buff = new Buffer(content);
-      ghRepo.updateContents(file.path + '?ref=master', commit, content, file.sha, function (err, data) {
+      ghRepo.updateContents(file.name, commit, content, file.sha, function (err, data) {
+        var b = new Buffer(data.content, 'base64');
+        data.content  = b.toString();
         res.json(data);
       });
     };
