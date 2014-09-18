@@ -17,7 +17,7 @@ exports.update = function (req, res) {
   ghRepo.contents(file, function (err, file) {
     if (file.type === 'file') {
       var buff = new Buffer(content);
-      ghRepo.updateContents(file.path, commit, content, file.sha, function (err, data) {
+      ghRepo.updateContents(file.path + '?ref=master', commit, content, file.sha, function (err, data) {
         res.json(data);
       });
     };
