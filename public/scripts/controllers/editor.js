@@ -1,19 +1,37 @@
 'use strict';
 angular.module('whimApp')
-  .controller('EditorCtrl', function ($scope, $ionicNavBarDelegate, Editor, File, $ionicPopup) {
+  .controller('EditorCtrl', function ($scope, $ionicNavBarDelegate, Editor, File, $ionicPopup, $timeout) {
 
     $scope.active = Editor.getActive();
     $scope.openFiles = Editor.getOpenFiles();
 
     $scope.commit = {};
 
-    $scope.editorOptions = {
-      lineWrapping : true,
-      lineNumbers: true,
-      matchBrackets: true,
-      mode: 'javascript',
-      theme:'monokai'
+    
+      $scope.editorOptions = {
+        lineWrapping : true,
+        lineNumbers: true,
+        matchBrackets: true,
+        dragDrop: false,
+        autofocus: true,
+        mode: 'javascript',
+        theme:'monokai'
+      };
+
+    $scope.editor = null;
+    
+    $scope.codemirrorLoaded = function(_editor){
+    // Editor part
+      var _doc = _editor.getDoc();
+      console.log(_doc);
+      _editor.focus();
+      $scope.editor = _editor;
     };
+
+    $scope.focus = function () {
+      console.log($scope.editor);
+      $scope.editor.focus();
+    }
 
     $scope.save = function () {
       $ionicPopup.show({

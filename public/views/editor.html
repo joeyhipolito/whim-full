@@ -14,13 +14,12 @@
     </a>
    
   </ion-header-bar>
-  <ion-content class="has-header b-content">
-    <ui-codemirror ng-repeat="file in openFiles"
+  <ion-content class="has-header b-content" scroll="false">
+    <div ui-codemirror="{ onLoad : codemirrorLoaded }" ng-repeat="file in openFiles"
         ui-codemirror-opts="editorOptions"
         ng-show="file.active == true"
         ng-model="file.content"
-        class="b-editor vflex">
-    </ui-codemirror>
+        class="b-editor vflex"></div>
     <button ng-click="save()"> Save </button>
   </ion-content>
 </ion-view>
